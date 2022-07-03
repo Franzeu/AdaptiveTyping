@@ -1,0 +1,16 @@
+.text-display {
+    width: 1000px;
+    height: 200px;
+
+    margin: auto;
+
+    font-size: 1.25rem;
+    color: #19282F;
+    word-wrap: break-word;
+    border: 2px;
+    border-style: dashed;
+    padding: 1rem;
+
+    
+}
+
