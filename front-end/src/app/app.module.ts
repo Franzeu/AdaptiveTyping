@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DisplayTextboxComponent } from './components/display-textbox/display-textbox.component';
 import { TypingTextboxComponent } from './components/typing-textbox/typing-textbox.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { TypingTextboxComponent } from './components/typing-textbox/typing-textb
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
