@@ -1,15 +1,19 @@
 .text-display {
     width: 1000px;
     height: 200px;
-
-    margin: auto;
-
-    font-size: 1.25rem;
-    color: #19282F;
-    word-wrap: break-word;
-    border: 2px;
-    border-style: dashed;
     padding: 1rem;
+    margin: auto;
+    
+    border: 2px;
+    border-radius: 0.5rem;
+    
+
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11);
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    color: #283739;
+    background-color: FFFFFF;
+    word-wrap: break-word;
 
     
 }
