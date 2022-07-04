@@ -1,15 +1,19 @@
-.inputContainer {
-    max-width: 1000px;
-    margin: 20px auto;
-    max-height: 20px;
-    border: 1px solid steelblue;
-    padding: 10px;
-    border-radius: 5px;
+.container {
+    text-align: center;
 }
 
-textarea {
+input {
     resize: none;
     overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
+    pointer-events: none;
+}
+
+mat-form-field {
+    overflow: hidden;
+    width: 50%;
+    margin-top: 20px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: steelblue!important;
 }
