@@ -1,5 +1,7 @@
-<div class="inputContainer">
-    <mat-form-field>
-        <textarea rows="1" cols="133" spellcheck="false" matTextarea ></textarea>
+<div class="container">
+    <mat-form-field appearance="outline">
+        <mat-label class="typingArea" for="userInput">Type here...</mat-label>
+        <input matInput ngModel name="userInput" #userInput="ngModel" (keyup)="updateInput(userInput)" (click)="startTest()" id="userInput" rows="1" spellcheck="false" autocomplete="off">
       </mat-form-field>
+      <button *ngIf="done" (click)="userInput.reset(); startTest()">Start</button>
 </div>
