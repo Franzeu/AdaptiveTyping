@@ -1,3 +1,4 @@
+'use strict';
 const dotenv = require('dotenv');
 const assert = require('assert');
 
@@ -31,6 +32,6 @@ module.exports = {
         storageBucket: STORAGE_BUCKET,
         messagingSenderId: MESSAGING_SENDER_ID,
         appId: APP_ID,
-        measurementId: MEASUREMENT_ID
+        //measurementId: MEASUREMENT_ID
       }
 }
