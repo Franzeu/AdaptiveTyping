@@ -21,7 +21,7 @@ const test_res = async  (req, res, next) => {
 const getrandomtext = async (req,res,next) =>{
     const numwords = 50; //number of words that the textbox displays
     const numletters = 4; //number of letter array fields in document
-    const numindexes = 5; // number of indexes for each letter 
+    //const numindexes = 5; // number of indexes for each letter 
     try{
         const text = await firestore.collection('Words'); //word lists are stored in Words collection 
         const data = await text.get();
@@ -35,22 +35,26 @@ const getrandomtext = async (req,res,next) =>{
                 let totestr = '';
                 for(let i = 0; i < numwords; i++){
                     let act = getRandomInt(numletters);
-                    let ind = getRandomInt(numindexes);
+                    let ind;
                     let str;
                     switch (act){//gets data document 
                         case 0: //A
+                            ind = getRandomInt(doc.data().A.length);
                             str = doc.data().A[ind];
                         break;
 
                         case 1: //B
+                            ind = getRandomInt(doc.data().B.length);
                             str = doc.data().B[ind];
                         break;
 
                         case 2: //C
+                            ind = getRandomInt(doc.data().C.length);
                             str = doc.data().C[ind];
                         break;
 
                         case 3: //D
+                            ind = getRandomInt(doc.data().D.length);
                             str = doc.data().D[ind];
                         break;
                         
