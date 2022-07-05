@@ -7,11 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class WordsService {
 
-  private _url: string = "http://localhost:4000/api/test"
-
   constructor(private http: HttpClient) { }
 
   getWords() {
-    return this.http.get(this._url);
+    const url = 'http://localhost:4000/api/test';
+    return this.http.get<any>(url);
   }
 }
