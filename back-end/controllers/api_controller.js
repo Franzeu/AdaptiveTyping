@@ -25,7 +25,7 @@ const getrandomtext = async (req,res,next) =>{
     try{
         const text = await firestore.collection('Words'); //word lists are stored in Words collection 
         const data = await text.get();
-        const textArray = [];
+        let textArray = [];
 
         if(data.empty){
             res.status(500).send('firestore Words collection is empty');
@@ -55,15 +55,17 @@ const getrandomtext = async (req,res,next) =>{
                         break;
                         
                     }
-                     totestr += str;
-                     totestr += ' ';
-                    console.log(str);
+                    //  totestr += str;
+                    //  totestr += ' ';
+                    // console.log(str);
+                    textArray.push(str);
 
                 }
 
-                console.log('total string');
-                console.log(totestr);
-                res.send(totestr); //sends text string back to port
+                // console.log('total string');
+                // console.log(totestr);
+                // res.send(totestr); //sends text string back to port
+                res.json({english: textArray});
 
             
             })
@@ -80,8 +82,35 @@ const getrandomtext = async (req,res,next) =>{
     }
 }
 
+// function to populate firestore words collection with data from local file, still being implemented
+const populate_words = async (req, res, next) => {
+    console.log('populate_words called');
+    try {
+        let word = "accent";
+        let words = await firestore.collection('Words').doc('Wordlist');
+
+        if(data.empty){
+            res.status(500).send('firestore Words collection is empty');
+        }
+        else{
+            documents.forEach(doc => {
+
+            })
+        }
+
+        res.send('Words collection successfully populated'); 
+    }
+
+    catch (error) {
+        res.status(400).send(error.message);
+
+    }
+
+}
+
 module.exports = {
 
     test_res,
-    getrandomtext
+    getrandomtext,
+    populate_words
 }
