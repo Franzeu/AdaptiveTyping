@@ -93,13 +93,14 @@ const populate_words = async (req, res, next) => {
         let word = "accent";
         let words = await firestore.collection('Words').doc('Wordlist');
 
-        if(data.empty){
+        if(!words){
             res.status(500).send('firestore Words collection is empty');
         }
         else{
-            documents.forEach(doc => {
-
-            })
+            words.update({
+                A: ["apple", "accent", "another", "ache", "argue"]
+            });
+            
         }
 
         res.send('Words collection successfully populated'); 
