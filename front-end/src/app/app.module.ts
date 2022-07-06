@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { TimerComponent } from './components/timer/timer.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { LoginButtonComponent } from './components/login-button/login-button.com
     DisplayTextboxComponent,
     TypingTextboxComponent,
     HeaderComponent,
-    LoginButtonComponent
+    LoginButtonComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
