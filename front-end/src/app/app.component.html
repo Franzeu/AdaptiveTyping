@@ -1,8 +1,6 @@
-
-
 <div>
   <app-header></app-header>
   <app-timer></app-timer>
-  <app-display-textbox></app-display-textbox>
-  <app-typing-textbox></app-typing-textbox>
+  <app-display-textbox (displaySet)="setTarget($event)"></app-display-textbox>
+  <app-typing-textbox [target]="this.target"></app-typing-textbox>
 </div>
