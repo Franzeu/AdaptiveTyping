@@ -2,6 +2,8 @@
 
 const firebase = require('../db');
 const firestore = firebase.firestore();
+const app = require('firebase/app');
+var fs = require('fs');
 
 function getRandomInt(max) { //used to return random integer
   return Math.floor(Math.random() * max);
@@ -90,16 +92,31 @@ const getrandomtext = async (req,res,next) =>{
 const populate_words = async (req, res, next) => {
     console.log('populate_words called');
     try {
+        let test = "A";
         let word = "accent";
         let words = await firestore.collection('Words').doc('Wordlist');
+        
 
         if(!words){
             res.status(500).send('firestore Words collection is empty');
         }
         else{
-            words.update({
-                A: ["apple", "accent", "another", "ache", "argue"]
+            
+            var arr = []
+            fs.readFile(__dirname + '/common_words.txt', function(err, data) {
+                if(err) throw err;
+                arr = data.toString().split("\n");
+                for(let i = 0; i < arr.length; i++) {
+
+                    let field = arr[i][0];
+                        
+                    words.update({
+                        [field] : app.firestore.FieldValue.arrayUnion(arr[i])
+                    })
+                        
+                    }
             });
+            
             
         }
 
