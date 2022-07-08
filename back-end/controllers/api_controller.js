@@ -2,6 +2,7 @@
 
 const firebase = require('../db');
 const firestore = firebase.firestore();
+const auth = firebase.auth();
 
 function getRandomInt(max) { //used to return random integer
   return Math.floor(Math.random() * max);
@@ -113,6 +114,13 @@ const populate_words = async (req, res, next) => {
 
 }
 
+auth.onAuthStateChanged( user => {
+	if(user != null){
+		console.log('logged in!');
+	} else{
+		console.log('No user');
+	}
+});
 module.exports = {
 
     test_res,
