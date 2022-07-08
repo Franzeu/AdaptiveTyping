@@ -9,16 +9,18 @@ input {
     pointer-events: none;
     font-size: 1.25rem;
     color: #444444;
+    caret-color: #444444;
 }
 
 mat-form-field {
     overflow: hidden;
     width: 50%;
     margin-top: 20px;
-    
+    caret-color: #444444!important;
     
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     color: #444444!important;
 }
+
