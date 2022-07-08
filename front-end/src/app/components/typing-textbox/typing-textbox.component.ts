@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import { DisplayTextboxComponent } from '../display-textbox/display-textbox.component';
 
@@ -11,8 +11,11 @@ export class TypingTextboxComponent implements OnInit {
   userInput: String = "";
   done: boolean = false;
   isEnabled: boolean = false;
+  hasTestStarted:boolean = false;
+
   @Input() target!: String;
-  
+  @Output() hasTestStartedEvent = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -20,6 +23,8 @@ export class TypingTextboxComponent implements OnInit {
 
   startTest() {
     this.done = false;
+    this.hasTestStarted = true;
+    this.hasTestStartedEvent.emit(this.hasTestStarted); 
   }
 
   updateInput(input: any) {

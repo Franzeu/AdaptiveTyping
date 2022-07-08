@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
   @Input() target!: String;
+  @Input() signalTimer!: boolean;
 
   start() {
     console.log("start");
@@ -14,6 +15,11 @@ export class AppComponent {
 
   setTarget(target: String) {
     this.target = target;
+    
+  }
+
+  sendSignalTimer(signalTimer: boolean) {
+    this.signalTimer = signalTimer;
     
   }
 }
