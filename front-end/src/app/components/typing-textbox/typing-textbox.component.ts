@@ -29,6 +29,7 @@ export class TypingTextboxComponent implements OnInit {
   }
 
   updateInput(input: any) {
+    console.log("target: %s", this.target);
     this.userInput = input.value;
     if (this.userInput.length === this.target.length) {
       this.userInput = "";

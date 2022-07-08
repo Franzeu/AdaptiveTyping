@@ -11,6 +11,7 @@ import { outputAst } from '@angular/compiler';
 export class DisplayTextboxComponent implements OnInit {
   data!: Word;
   words!: String;
+  isLoaded: boolean = false;
   @Output() displaySet = new EventEmitter();
 
   constructor(private wordService: WordsService) { }
@@ -18,14 +19,9 @@ export class DisplayTextboxComponent implements OnInit {
   ngOnInit(): void {  
     this.wordService.getWords().subscribe((response) => {
       this.data = response;
-      this.update();
+      this.isLoaded = true;
+      this.words = this.data.english.join(' ');
+      this.displaySet.emit(this.words);
     });
-    this.update();
   }
-  
-  update() {
-    this.words = this.data.english.join(' ');
-    this.displaySet.emit(this.words);
-  }
-
 }
