@@ -1,13 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css']
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnInit, DoCheck {
   startTime: number = 60;
   interval: any;
+  id!: any;
+  started: boolean = false;
   @Input() signalReceived!: boolean;
   
   constructor() { }
@@ -15,16 +17,18 @@ export class TimerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngDoCheck(): void {
+    if (this.signalReceived && !this.started) {
+      this.startTimer();
+      this.started = true;
+    }
+  }
   
   startTimer() {
-    console.log(this.signalReceived);
     this.interval = setInterval(() => {
       if(this.startTime > 0) {
         this.startTime = this.startTime - 1;
       } 
-      else {
-        this.startTime = 60;
-      }
     },1000)
   }
   

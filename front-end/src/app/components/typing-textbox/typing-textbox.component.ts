@@ -22,6 +22,7 @@ export class TypingTextboxComponent implements OnInit {
   }
 
   startTest() {
+    console.log("sending signal");
     this.done = false;
     this.hasTestStarted = true;
     this.hasTestStartedEvent.emit(this.hasTestStarted); 
