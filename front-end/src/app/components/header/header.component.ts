@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   title: string = "AdaptiveTyping"
+  icon: string = "⌨️"
 
   constructor() { }
 
@@ -14,3 +15,5 @@ export class HeaderComponent implements OnInit {
   }
 
 }
+
+
