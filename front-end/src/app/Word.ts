@@ -1,3 +1,3 @@
 export interface Word {
-    language: string[];
+    english: string[];
 }

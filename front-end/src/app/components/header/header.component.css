@@ -1,6 +1,7 @@
 h1 {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 1.75rem;
+    color: #444444;;
 }
 
 header{
@@ -8,9 +9,19 @@ header{
     justify-content: space-between;
     align-items: center;
     margin-bottom: 5rem;
-    margin-top: 2rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-
+    margin-top: 70px;
+    margin-left: 12.5rem;
+    margin-right: 12.5rem;
     
 }
+
+.title {
+    display: flex;
+    flex-direction: row;
+}
+
+#icon_logo {
+    font-size: 3rem;
+    margin-right: 1rem;
+}
+
