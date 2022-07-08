@@ -41,23 +41,23 @@ const getrandomtext = async (req,res,next) =>{
                     let str;
                     switch (act){//gets data document 
                         case 0: //A
-                            ind = getRandomInt(doc.data().A.length);
-                            str = doc.data().A[ind];
+                            ind = getRandomInt(doc.data().a.length);
+                            str = doc.data().a[ind];
                         break;
 
                         case 1: //B
-                            ind = getRandomInt(doc.data().B.length);
-                            str = doc.data().B[ind];
+                            ind = getRandomInt(doc.data().b.length);
+                            str = doc.data().b[ind];
                         break;
 
                         case 2: //C
-                            ind = getRandomInt(doc.data().C.length);
-                            str = doc.data().C[ind];
+                            ind = getRandomInt(doc.data().c.length);
+                            str = doc.data().c[ind];
                         break;
 
                         case 3: //D
-                            ind = getRandomInt(doc.data().D.length);
-                            str = doc.data().D[ind];
+                            ind = getRandomInt(doc.data().d.length);
+                            str = doc.data().d[ind];
                         break;
                         
                     }
