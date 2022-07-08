@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TitleStrategy } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
   @Input() target!: String;
+  @Input() signalTimer!: boolean;
 
   start() {
     console.log("start");
@@ -15,5 +17,9 @@ export class AppComponent {
   setTarget(target: String) {
     this.target = target;
     
+  }
+
+  sendSignalTimer(signalTimer: boolean) {
+      this.signalTimer = signalTimer;
   }
 }

@@ -12,7 +12,7 @@
         (keydown.arrowright)=(false);
         (keydown.arrowup)=(false);
         (keydown.arrowdown)=(false);
-        (click)="startTest()" 
+        (input)="hasTestStarted ? null : startTest()" 
         [disabled]="isEnabled"
         id="userInput" 
         rows="1" 

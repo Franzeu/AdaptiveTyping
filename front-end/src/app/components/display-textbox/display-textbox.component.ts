@@ -27,4 +27,5 @@ export class DisplayTextboxComponent implements OnInit {
     this.words = this.data.english.join(' ');
     this.displaySet.emit(this.words);
   }
+
 }

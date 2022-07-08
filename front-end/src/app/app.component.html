@@ -1,6 +1,6 @@
 <div>
   <app-header></app-header>
-  <app-timer></app-timer>
+  <app-timer [signalReceived]="this.signalTimer"></app-timer>
   <app-display-textbox (displaySet)="setTarget($event)"></app-display-textbox>
-  <app-typing-textbox [target]="this.target"></app-typing-textbox>
+  <app-typing-textbox [target]="this.target" (hasTestStartedEvent)="sendSignalTimer($event)"></app-typing-textbox>
 </div>
