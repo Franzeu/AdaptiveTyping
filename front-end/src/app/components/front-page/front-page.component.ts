@@ -1,27 +1,15 @@
-import { Component, Input } from '@angular/core';
-import { TitleStrategy } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-front-page',
   templateUrl: './front-page.component.html',
   styleUrls: ['./front-page.component.css']
 })
-export class FrontPageComponent{
+export class FrontPageComponent implements OnInit {
 
-  @Input() target!: String;
-  @Input() signalTimer!: boolean;
+  constructor() { }
 
-  start() {
-    console.log("start");
-  }
-
-  setTarget(target: String) {
-    this.target = target;
-    
-  }
-
-  sendSignalTimer(signalTimer: boolean) {
-      this.signalTimer = signalTimer;
+  ngOnInit(): void {
   }
 
 }

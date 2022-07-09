@@ -7,8 +7,6 @@ input {
     resize: none;
     overflow: hidden;
     pointer-events: none;
-    font-size: 1.25rem;
-    color: #444444;
 }
 
 mat-form-field {
@@ -16,9 +14,8 @@ mat-form-field {
     width: 50%;
     margin-top: 20px;
     
-    
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: #444444!important;
+    color: steelblue!important;
 }

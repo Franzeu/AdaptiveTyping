@@ -11,8 +11,8 @@ export class WordsService {
 
   constructor(private http: HttpClient) { }
 
-  getWords(): Observable<Word>{
-    return this.http.get<Word>(this.apiURL);
+  getWords(): Observable<Word[]>{
+    return this.http.get<Word[]>(this.apiURL);
   }
 
 }
