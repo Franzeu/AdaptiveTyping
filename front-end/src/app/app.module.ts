@@ -14,6 +14,22 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginButtonComponent } from './components/login-button/login-button.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { ResultComponent } from './components/result/result.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ForgotPasswordsComponent } from './components/forgot-passwords/forgot-passwords.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { FrontPageComponent } from './components/front-page/front-page.component';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from '../environments/environment';
+
+// Auth service 
+import { AuthService } from './shared/services/auth.service';
 
 
 @NgModule({
@@ -24,10 +40,21 @@ import { ResultComponent } from './components/result/result.component';
     HeaderComponent,
     LoginButtonComponent,
     TimerComponent,
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordsComponent,
+    VerifyEmailComponent,
+    FrontPageComponent,
     ResultComponent
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,
@@ -35,7 +62,7 @@ import { ResultComponent } from './components/result/result.component';
     HttpClientModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
