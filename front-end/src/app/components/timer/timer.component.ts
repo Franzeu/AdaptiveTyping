@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, DoCheck, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-timer',
@@ -11,6 +11,8 @@ export class TimerComponent implements OnInit, DoCheck {
   id!: any;
   started: boolean = false;
   @Input() signalReceived!: boolean;
+  @Input() testDone: boolean = false;
+  @Output() endTimeEvent = new EventEmitter<number>();
   
   constructor() { }
 
@@ -22,10 +24,14 @@ export class TimerComponent implements OnInit, DoCheck {
       this.startTimer();
       this.started = true;
     }
+    if (this.testDone || this.startTime === 0) {
+      clearInterval(this.id);
+      this.endTimeEvent.emit(this.startTime);
+    }
   }
   
   startTimer() {
-    this.interval = setInterval(() => {
+    this.id = this.interval = setInterval(() => {
       if(this.startTime > 0) {
         this.startTime = this.startTime - 1;
       } 

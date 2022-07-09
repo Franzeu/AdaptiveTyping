@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { WordsService } from 'src/app/words.service';
 import { Word } from 'src/app/Word';
 import { outputAst } from '@angular/compiler';
@@ -8,10 +8,11 @@ import { outputAst } from '@angular/compiler';
   templateUrl: './display-textbox.component.html',
   styleUrls: ['./display-textbox.component.css']
 })
-export class DisplayTextboxComponent implements OnInit {
+export class DisplayTextboxComponent implements OnInit{
   data!: Word;
   words!: String;
   isLoaded: boolean = false;
+  @Input() userInput!: String;
   @Output() displaySet = new EventEmitter();
 
   constructor(private wordService: WordsService) { }
@@ -24,4 +25,12 @@ export class DisplayTextboxComponent implements OnInit {
       this.displaySet.emit(this.words);
     });
   }
+
+  /* ngDoCheck(): void {
+    this.refresh();
+  }
+
+  refresh(): void {
+    console.log(this.userInput);
+  } */
 }

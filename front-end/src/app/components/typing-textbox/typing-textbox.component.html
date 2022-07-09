@@ -1,23 +1,23 @@
 <div class="container">
-    <mat-form-field appearance="outline">
-        <mat-label class="typingArea" for="userInput"></mat-label>
-        <input 
-        matInput 
-        ngModel 
-        type="text" 
-        name="userInput" 
-        #userInput="ngModel" 
-        (keyup)="updateInput(userInput)" 
-        (keydown.arrowleft)=(false);
-        (keydown.arrowright)=(false);
-        (keydown.arrowup)=(false);
-        (keydown.arrowdown)=(false);
-        (input)="hasTestStarted ? null : startTest()" 
-        [disabled]="isEnabled"
-        id="userInput" 
-        rows="1" 
-        spellcheck="false" 
-        autocomplete="off"
-        >
-      </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label class="typingArea" for="userInput"></mat-label>
+      <input 
+      matInput 
+      ngModel 
+      type="text" 
+      name="userInput" 
+      #userInput="ngModel" 
+      (keyup)="updateInput(userInput)" 
+      (keydown.arrowleft)=(false);
+      (keydown.arrowright)=(false);
+      (keydown.arrowup)=(false);
+      (keydown.arrowdown)=(false);
+      (input)="hasTestStarted ? null : startTest()" 
+      [disabled]="isEnabled"
+      id="userInput" 
+      rows="1" 
+      spellcheck="false" 
+      autocomplete="off"
+      >
+    </mat-form-field>
 </div>
