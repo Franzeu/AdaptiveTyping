@@ -1,24 +1,3 @@
-<div>
-  <app-header></app-header>
-  <app-timer 
-    [signalReceived]="this.signalTimer" 
-    [testDone]="this.done" 
-    (endTimeEvent)="timerDone($event)"
-  ></app-timer>
-  <app-display-textbox 
-    (displaySet)="setTarget($event)" 
-    [userInput]="this.userInput"
-  ></app-display-textbox>
-  <app-typing-textbox 
-    [target]="this.target" 
-    (hasTestStartedEvent)="sendSignalTimer($event)" 
-    (testDoneEvent)="typingDone($event)"
-    [timeDone]="done"
-  ></app-typing-textbox>
-  <app-result
-    *ngIf="this.done"
-    [target]="this.target" 
-    [userInput]="this.userInput" 
-    [time]="this.time"
-  ></app-result>
-</div>
+<!--The routed views render in <router-outlet> section-->
+<router-outlet></router-outlet>
+

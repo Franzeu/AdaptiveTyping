@@ -5,14 +5,17 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ForgotPasswordsComponent } from './components/forgot-passwords/forgot-passwords.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { AppComponent } from './app.component';
 
 //front page components
 import { FrontPageComponent } from './components/front-page/front-page.component';
+
 //route guard
 import { AuthGuard } from './shared/guard/auth.guard'
 
 const routes: Routes = [
-  {path: '',component: FrontPageComponent},
+  
+  {path: '', component: FrontPageComponent},
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
