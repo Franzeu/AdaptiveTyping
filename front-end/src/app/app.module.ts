@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginButtonComponent } from './components/login-button/login-button.component';
 import { TimerComponent } from './components/timer/timer.component';
+import { ResultComponent } from './components/result/result.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TimerComponent } from './components/timer/timer.component';
     TypingTextboxComponent,
     HeaderComponent,
     LoginButtonComponent,
-    TimerComponent
+    TimerComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,
