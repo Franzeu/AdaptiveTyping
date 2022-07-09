@@ -29,6 +29,7 @@ import { environment } from '../environments/environment';
 // Auth service 
 import { AuthService } from './shared/services/auth.service';
 import { FrontPageComponent } from './components/front-page/front-page.component';
+//import { FrontPageComponent } from './components/front-page/front-page.component';
 
 @NgModule({
   declarations: [

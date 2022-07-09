@@ -8,19 +8,12 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 
 //front page components
 import { FrontPageComponent } from './components/front-page/front-page.component';
-import { DisplayTextboxComponent } from './components/display-textbox/display-textbox.component';
-//import { TypingTextboxComponent } from './components/typing-textbox/typing-textbox.component';
-////import { HeaderComponent } from './components/header/header.component';
-//import { TimerComponent } from './components/timer/timer.component';
-//import { LoginButtonComponent } from './components/login-button/login-button.component';
+
 
 //route guard
 import { AuthGuard } from './shared/guard/auth.guard';
 const routes: Routes = [
-  //{ path: '', redirectTo: '/sign-in', pathMatch: 'full' },
-  
-  //{ path: '', redirectTo: '/front-page', pathMatch: 'full' },
-  {path: '',component: FrontPageComponent},
+  {path: '',component: FrontPageComponent},//routes to front page at start
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
