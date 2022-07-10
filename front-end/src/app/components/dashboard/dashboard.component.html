@@ -21,6 +21,14 @@
                 <i class="fas fa-sign-out-alt"></i>Log out
               </a>
             </li>
+            <!-- Go back to Typing test -->
+            <div class="formGroup">
+              <button type="button"
+              class="redirect"
+              mat-raised-button 
+              routerLink="">
+              Back to Typing Test</button>
+            </div>
           </ul>
         </div>
       </nav>
@@ -34,8 +42,7 @@
           <div class="row" *ngIf="authService.userData as user">
             <div class="col-md-12">
               <div class="media">
-                <img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
-                  alt="{{user.displayName}}">
+                
                 <div class="media-body">
                   <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
                   <p>User ID: <strong>{{user.uid}}</strong></p>

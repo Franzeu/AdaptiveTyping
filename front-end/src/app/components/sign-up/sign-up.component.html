@@ -41,6 +41,7 @@
         <button
           type="button"
           class="btn googleBtn"
+          mat-raised-button 
           (click)="authService.GoogleAuth()"
         >
           <i class="fab fa-google-plus-g"></i>
@@ -54,6 +55,16 @@
         >Already have an account?
         <span class="redirect" routerLink="/sign-in">Log In</span></span
       >
+    </div>
+
+    <!--Go Back To typing test-->
+    
+    <div class="formGroup">
+      <button type="button"
+      class="redirect"
+      mat-raised-button 
+      routerLink="">
+      Back to Typing Test</button>
     </div>
   </div>
 </div>
