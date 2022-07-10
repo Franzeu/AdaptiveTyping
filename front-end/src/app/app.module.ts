@@ -30,6 +30,8 @@ import { environment } from '../environments/environment';
 
 // Auth service 
 import { AuthService } from './shared/services/auth.service';
+import { LinFrontPageComponent } from './components/lin-front-page/lin-front-page.component';
+import { LinHeaderComponent } from './components/lin-header/lin-header.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { AuthService } from './shared/services/auth.service';
     ForgotPasswordsComponent,
     VerifyEmailComponent,
     FrontPageComponent,
-    ResultComponent
+    ResultComponent,
+    LinFrontPageComponent,
+    LinHeaderComponent
   ],
   imports: [
     BrowserModule,
