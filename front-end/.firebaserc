@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "adaptivetyping-b4add": {
+      "hosting": {
+        "frontend": [
+          "adaptivetyping-b4add"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "adaptivetyping-b4add"
+  }
+}

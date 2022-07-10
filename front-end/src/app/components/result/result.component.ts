@@ -13,6 +13,8 @@ export class ResultComponent implements OnInit, DoCheck {
   @Input() time!: number;
   wpm!: string;
   accuracy!: string;
+  numberWPM !: number;
+  
 
   constructor() { }
 
@@ -31,5 +33,6 @@ export class ResultComponent implements OnInit, DoCheck {
     }
 
     this.accuracy = (correct / this.target.length * 100).toFixed(2);
+    this.numberWPM = +this.wpm;
   }
 }
