@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,7 +61,8 @@ import { AuthService } from './shared/services/auth.service';
     MatInputModule,
     FormsModule,
     HttpClientModule,
-    MatButtonModule
+    MatProgressSpinnerModule,
+    MatButtonModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

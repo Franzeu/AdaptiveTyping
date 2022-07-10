@@ -1,0 +1,22 @@
+h2 {
+    font-size: 1.75rem;
+}
+
+.container {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+
+}
+.wpmContainer{
+    padding: 20px;
+}
+
+.accuracyContainer{
+    padding: 20px;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: "#444444"
+}
