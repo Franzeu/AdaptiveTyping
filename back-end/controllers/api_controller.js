@@ -23,7 +23,7 @@ const test_res = async  (req, res, next) => {
 const getrandomtext = async (req,res,next) =>{
     const numwords = 50; //number of words that the textbox displays
     const numletters = 4; //number of letter array fields in document
-    //const numindexes = 5; // number of indexes for each letter 
+
     try{
         const text = await firestore.collection('Words'); //word lists are stored in Words collection 
         const data = await text.get();
@@ -34,43 +34,16 @@ const getrandomtext = async (req,res,next) =>{
         }
         else{
             data.forEach(doc =>{
-                let totestr = '';
-                for(let i = 0; i < numwords; i++){
-                    let act = getRandomInt(numletters);
-                    let ind;
-                    let str;
-                    switch (act){//gets data document 
-                        case 0: //A
-                            ind = getRandomInt(doc.data().a.length);
-                            str = doc.data().a[ind];
-                        break;
 
-                        case 1: //B
-                            ind = getRandomInt(doc.data().b.length);
-                            str = doc.data().b[ind];
-                        break;
+                const keys = Object.keys(doc.data());
+                
 
-                        case 2: //C
-                            ind = getRandomInt(doc.data().c.length);
-                            str = doc.data().c[ind];
-                        break;
+                for (let i = 0; i < numwords; i++) {
 
-                        case 3: //D
-                            ind = getRandomInt(doc.data().d.length);
-                            str = doc.data().d[ind];
-                        break;
-                        
-                    }
-                    //  totestr += str;
-                    //  totestr += ' ';
-                    // console.log(str);
-                    textArray.push(str);
-
+                    let arr = doc.data()[keys[getRandomInt(keys.length)]]
+                    textArray.push(arr[getRandomInt(arr.length)]);
                 }
-
-                // console.log('total string');
-                // console.log(totestr);
-                // res.send(totestr); //sends text string back to port
+                  
                 res.json({english: textArray});
 
             
