@@ -1,6 +1,6 @@
 .container {
     text-align: center;
-    font-family: 'Roboto', "Helvetica Neue", sans-serif; 
+    
 }
 
 input {
@@ -10,6 +10,7 @@ input {
     font-size: 1.25rem;
     color: #444444;
     caret-color: #444444;
+    font-family: 'Roboto Mono', "Helvetica Neue", sans-serif; 
 }
 
 mat-form-field {
