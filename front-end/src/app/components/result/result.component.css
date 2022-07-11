@@ -20,6 +20,3 @@ h2 {
     padding: 20px;
 }
 
-.mat-progress-spinner circle, .mat-spinner circle {
-    stroke: "#444444"
-}
