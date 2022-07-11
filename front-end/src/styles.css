@@ -8,4 +8,15 @@ body {
     background-color: #FEFBF3;
 }
 
+.correct {
+    color:green;
+}
 
+.incorrect {
+    color: red;
+    text-decoration: underline;
+}
+
+.default {
+    color: #444444;
+}

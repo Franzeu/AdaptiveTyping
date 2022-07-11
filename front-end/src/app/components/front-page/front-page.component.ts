@@ -41,4 +41,8 @@ export class FrontPageComponent {
     this.done = true;
     this.time = time;
   }
+
+  transferInput(newInput: String) {
+    this.userInput = newInput;
+  }
 }
