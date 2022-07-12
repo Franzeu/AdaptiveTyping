@@ -33,13 +33,16 @@ export class ResultComponent implements OnInit, DoCheck {
     const errorArray = [];
 
     for (let i = 0; i < targetArray.length; i++) {
-      if (targetArray[i] === inputArray[i]) {
-        
-      }
       if (targetArray[i] !== inputArray[i]) {
-        errorArray.push(inputArray[i]);
+        for (let x = 0; x < targetArray[i].length; x++){
+          if (targetArray[i][x] !== inputArray[i][x]) {
+            errorArray.push(targetArray[i][x]);
+            
+          }
+        }
       }
     }
+    console.log(errorArray);
 
     this.accuracy = ((targetArray.length - errorArray.length) / targetArray.length * 100).toFixed(2);
   }
