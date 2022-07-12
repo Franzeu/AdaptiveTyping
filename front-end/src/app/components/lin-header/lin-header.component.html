@@ -3,13 +3,11 @@
         <h1 id="icon_logo">{{icon}}</h1>
         <h1>{{ title }}</h1>
     </div>
-    <div class="redirectToSignin">
-        <button type="button"
-        class="redirect"
-        mat-raised-button 
-        routerLink="/sign-in">
-        Logout</button>
-    </div>
+    <li class="nav-item">
+        <a class="nav-link" (click)="authService.SignOut()">
+          <i class="fas fa-sign-out-alt"></i>Log out
+        </a>
+      </li>
     
     
 </header>
