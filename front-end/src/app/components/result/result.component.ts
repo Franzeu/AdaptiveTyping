@@ -25,14 +25,22 @@ export class ResultComponent implements OnInit, DoCheck {
     console.log(this.userInput);
     console.log(this.time);
     this.wpm = ((this.userInput.length / 5) / ((60 - this.time) / 60)).toFixed(2);
-    let correct = 0;
-    for (let i = 0; i < this.userInput.length; i++) {
-      if (this.userInput[i] == this.target[i]) {
-        correct += 1;
+
+    const targetArray = this.target.split(" ");
+    const inputArray = this.userInput.split(" ");
+    console.log(targetArray);
+    console.log(inputArray);
+    const errorArray = [];
+
+    for (let i = 0; i < targetArray.length; i++) {
+      if (targetArray[i] === inputArray[i]) {
+        
+      }
+      if (targetArray[i] !== inputArray[i]) {
+        errorArray.push(inputArray[i]);
       }
     }
 
-    this.accuracy = (correct / this.target.length * 100).toFixed(2);
-    this.numberWPM = +this.wpm;
+    this.accuracy = ((targetArray.length - errorArray.length) / targetArray.length * 100).toFixed(2);
   }
 }

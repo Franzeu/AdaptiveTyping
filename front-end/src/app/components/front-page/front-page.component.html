@@ -14,6 +14,7 @@
     (hasTestStartedEvent)="sendSignalTimer($event)" 
     (testDoneEvent)="typingDone($event)"
     [timeDone]="done"
+    (newInputEvent)="transferInput($event)"
   ></app-typing-textbox>
   <app-result
     *ngIf="this.done"

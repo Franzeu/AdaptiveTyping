@@ -5,6 +5,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ForgotPasswordsComponent } from './components/forgot-passwords/forgot-passwords.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { LinFrontPageComponent } from './components/lin-front-page/lin-front-page.component';
 import { AppComponent } from './app.component';
 
 //front page components
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'logged-in-front', component: LinFrontPageComponent },
   { path: 'forgot-password', component: ForgotPasswordsComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
 ];

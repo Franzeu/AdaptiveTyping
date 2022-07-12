@@ -15,7 +15,13 @@
     word-wrap: break-word;
     overflow: hidden;
     font-family: 'Roboto Mono', "Helvetica Neue", sans-serif; 
-
-    
 }
 
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+    text-decoration: underline;
+  }

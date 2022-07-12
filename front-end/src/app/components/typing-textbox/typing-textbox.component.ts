@@ -17,6 +17,7 @@ export class TypingTextboxComponent implements OnInit, DoCheck {
   @Input() timeDone: boolean = false;
   @Output() hasTestStartedEvent = new EventEmitter<boolean>();
   @Output() testDoneEvent = new EventEmitter<String>();
+  @Output() newInputEvent = new EventEmitter<String>();
 
   constructor() { }
 
@@ -38,6 +39,7 @@ export class TypingTextboxComponent implements OnInit, DoCheck {
 
   updateInput(input: any) {
     this.userInput = input.value;
+    this.newInputEvent.emit(this.userInput);
     if (this.userInput.length === this.target.length && !this.done) {
       this.testDoneEvent.emit(this.userInput);
       this.isEnabled = true;

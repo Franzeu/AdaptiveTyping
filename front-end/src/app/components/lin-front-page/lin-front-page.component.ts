@@ -4,10 +4,10 @@ import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './front-page.component.html',
-  styleUrls: ['./front-page.component.css']
+  templateUrl: './lin-front-page.component.html',
+  styleUrls: ['./lin-front-page.component.css']
 })
-export class FrontPageComponent {
+export class LinFrontPageComponent {
   @Input() target!: String;
   @Input() signalTimer!: boolean;
   @Input() done: boolean = false;
@@ -40,9 +40,5 @@ export class FrontPageComponent {
   timerDone(time: number) {
     this.done = true;
     this.time = time;
-  }
-
-  transferInput(newInput: String) {
-    this.userInput = newInput;
   }
 }
