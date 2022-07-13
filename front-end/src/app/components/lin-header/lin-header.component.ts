@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthService } from 'src/app/shared/services/auth.service';
 @Component({
   selector: 'app-lin-header',
   templateUrl: './lin-header.component.html',
@@ -8,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class LinHeaderComponent implements OnInit {
   title: string = "AdaptiveTyping"
   icon: string = "⌨️"
-
-  constructor() { }
-
+  
+  constructor(public authService: AuthService) {}
   ngOnInit(): void {
   }
 
