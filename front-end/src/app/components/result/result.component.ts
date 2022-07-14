@@ -4,6 +4,7 @@ import { User } from 'src/app/shared/services/user';
 import { userStats } from 'src/app/shared/services/userStats';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { NumberValueAccessor } from '@angular/forms';
 
 const httpOptions = {
   headers: new HttpHeaders(
@@ -27,8 +28,11 @@ export class ResultComponent implements OnInit, DoCheck {
   once: boolean = false;
   wpm!: string;
   accuracy!: string;
-  numberWPM !: number;
-  oldWPM !: number;
+  numberWPM!: number;
+  oldWPM!: number;
+  oldAcc!: number;
+  wpmImprovement!: string;
+  accImprovement!: string;
   private userURL = 'http://localhost:4000/api/strusrdata';
   private statsURL = 'http://localhost:4000/api/gtusrdata';
 
@@ -37,6 +41,7 @@ export class ResultComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     this.getUserStats().subscribe((response) => {
       this.oldWPM = response.wpm;
+      this.oldAcc = response.accuracy;
     });
   }
 
@@ -64,9 +69,13 @@ export class ResultComponent implements OnInit, DoCheck {
         }
       }
     }
-    
 
     this.accuracy = ((targetArray.length - errorArray.length) / targetArray.length * 100).toFixed(2);
+
+    // Skeleton of improvement calculation
+    /* this.wpmImprovement = ((Number(this.wpm) - this.oldWPM) / this.oldWPM * 100).toFixed(2);
+    this.accImprovement = ((Number(this.accuracy) - this.oldAcc) / this.oldAcc * 100).toFixed(2); */
+
     if (!this.once) {
       const wpmNum = Number(this.wpm);
       const accNum = Number(this.accuracy);
