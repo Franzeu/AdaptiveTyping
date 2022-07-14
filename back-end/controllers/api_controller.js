@@ -106,15 +106,17 @@ const populate_words = async (req, res, next) => {
 
 const store_usr_data = async(req, res, next) => {
     try{
-        const usrid = Object.values(req.body);
-        let words = await firestore.collection('users').doc(usrid);
+        const usridarr = Object.values(req.body.userid);
+        const usrid = usridarr.join("");
+        const wordspm = Object.values(req.body.wpm);
+        await firestore.collection('userstats').doc(usrid).set(req.body);
         //const user = firestore.collection('users');
         //const data = req.peper;
         //const value = JSON.parse(data); 
         console.log('keys  ' );
 
         //console.log(Object.entries(req));
-        console.log(Object.values(req.body));
+        console.log(usrid);
         //await firestore.collection('').doc.set(data);
         res.send('data received');
 
