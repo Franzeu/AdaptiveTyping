@@ -46,11 +46,19 @@ export class ResultComponent implements OnInit, DoCheck {
     const targetArray = this.target.split(/(\s+)/).filter( str => str.trim().length > 0)
     const inputArray = this.userInput.split(/(\s+)/).filter( str => str.trim().length > 0)
     const errorArray = [];
+    var errorDictionary: { [key: string]: any } = {};
 
     for (let i = 0; i < targetArray.length; i++) {
       if (targetArray[i] !== inputArray[i]) {
         for (let x = 0; x < targetArray[i].length; x++){
           if (targetArray[i][x] !== inputArray[i][x]) {
+            // Checks if the letter is already in the errorDictionary. If it is, increment by 1, and if it isn't create a key/value
+            if(errorDictionary.hasOwnProperty(targetArray[i][x])){
+              errorDictionary[targetArray[i][x]] = errorDictionary[targetArray[i][x]] + 1;
+            }
+            else{
+              errorDictionary[targetArray[i][x]] = 1;
+            }
             errorArray.push(targetArray[i][x]);
           }
         }
@@ -62,7 +70,8 @@ export class ResultComponent implements OnInit, DoCheck {
     if (!this.once) {
       const wpmNum = Number(this.wpm);
       const accNum = Number(this.accuracy);
-      const user: userStats = { uid:this.authService.userData.uid, wpm:wpmNum, accuracy:accNum };
+      // Sends an error dictionary to the backend. Key is the letter and the value is the amount of times the user misses the character.
+      const user: userStats = { uid:this.authService.userData.uid, wpm:wpmNum, accuracy:accNum, errors:errorDictionary };
       this.updateData(user).subscribe(response => console.log(response));
       this.once = true;
     }
