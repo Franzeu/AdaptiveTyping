@@ -4,6 +4,7 @@ const firebase = require('../db');
 const firestore = firebase.firestore();
 const app = require('firebase/app');
 var fs = require('fs');
+const { json } = require('body-parser');
 
 function getRandomInt(max) { //used to return random integer
   return Math.floor(Math.random() * max);
@@ -103,9 +104,31 @@ const populate_words = async (req, res, next) => {
 
 }
 
+const store_usr_data = async(req, res, next) => {
+    try{
+        const usrid = Object.values(req.body);
+        let words = await firestore.collection('users').doc(usrid);
+        //const user = firestore.collection('users');
+        //const data = req.peper;
+        //const value = JSON.parse(data); 
+        console.log('keys  ' );
+
+        //console.log(Object.entries(req));
+        console.log(Object.values(req.body));
+        //await firestore.collection('').doc.set(data);
+        res.send('data received');
+
+
+    }
+    catch(error){
+        //res.send('data not success');
+		res.status(400).send(error.message)
+    }
+}
 module.exports = {
 
     test_res,
     getrandomtext,
-    populate_words
+    populate_words,
+    store_usr_data
 }
