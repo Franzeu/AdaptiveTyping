@@ -1,10 +1,10 @@
 'use strict';
-
 const firebase = require('../db');
 const firestore = firebase.firestore();
 const app = require('firebase/app');
 var fs = require('fs');
 const { json } = require('body-parser');
+const FieldValue = require('firebase-admin').firestore.FieldValue;
 
 function getRandomInt(max) { //used to return random integer
   return Math.floor(Math.random() * max);
@@ -108,17 +108,20 @@ const store_usr_data = async(req, res, next) => {
     try{
         const usridarr = Object.values(req.body.userid);
         const usrid = usridarr.join("");
-        const wordspm = Object.values(req.body.wpm);
-        await firestore.collection('userstats').doc(usrid).set(req.body);
-        //const user = firestore.collection('users');
-        //const data = req.peper;
-        //const value = JSON.parse(data); 
-        console.log('keys  ' );
+        const user = firestore.collection('userstats').doc(usrid);
 
-        //console.log(Object.entries(req));
-        console.log(usrid);
-        //await firestore.collection('').doc.set(data);
-        res.send('data received');
+        const wordspm = Object.values(req.body.wpm);
+        const accp = Object.values(req.body.accperc);
+        console.log(usridarr);
+      //  console.log(accp);
+
+
+        await user.update({wpm: FieldValue.arrayUnion(wordspm)});
+        await user.update({accperc: FieldValue.arrayUnion(accp)});
+        
+
+        //console.log(usrid);
+        res.send('user data received');
 
 
     }
