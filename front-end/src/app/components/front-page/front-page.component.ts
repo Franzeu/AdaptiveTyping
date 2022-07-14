@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TitleStrategy } from '@angular/router';
 import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-root',

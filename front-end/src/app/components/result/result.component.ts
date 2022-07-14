@@ -26,10 +26,8 @@ export class ResultComponent implements OnInit, DoCheck {
     console.log(this.time);
     this.wpm = ((this.userInput.length / 5) / ((60 - this.time) / 60)).toFixed(2);
 
-    const targetArray = this.target.split(" ");
-    const inputArray = this.userInput.split(" ");
-    console.log(targetArray);
-    console.log(inputArray);
+    const targetArray = this.target.split(/(\s+)/).filter( str => str.trim().length > 0)
+    const inputArray = this.userInput.split(/(\s+)/).filter( str => str.trim().length > 0)
     const errorArray = [];
 
     for (let i = 0; i < targetArray.length; i++) {
@@ -37,7 +35,6 @@ export class ResultComponent implements OnInit, DoCheck {
         for (let x = 0; x < targetArray[i].length; x++){
           if (targetArray[i][x] !== inputArray[i][x]) {
             errorArray.push(targetArray[i][x]);
-            
           }
         }
       }
