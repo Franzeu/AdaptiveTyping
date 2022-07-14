@@ -106,25 +106,41 @@ const populate_words = async (req, res, next) => {
 
 const store_usr_data = async(req, res, next) => {
     try{
-        const usridarr = Object.values(req.body.userid);
+        const usridarr = Object.values(req.body.uid);
         const usrid = usridarr.join("");
-        const wordspm = Object.values(req.body.wpm);
+        
+        console.log('store data called');
         await firestore.collection('userstats').doc(usrid).set(req.body);
-        //const user = firestore.collection('users');
-        //const data = req.peper;
-        //const value = JSON.parse(data); 
-        console.log('keys  ' );
+        
 
-        //console.log(Object.entries(req));
-        console.log(usrid);
-        //await firestore.collection('').doc.set(data);
         res.send('data received');
 
 
     }
     catch(error){
         //res.send('data not success');
+        console.log(error.message);
+
 		res.status(400).send(error.message)
+    }
+}
+
+const get_usr_data = async(req, res, next) => {
+
+    try {
+
+        const url = req.url;
+        console.log(url.slice(10));
+        
+        // const usridarr = Object.values(req.body.uid);
+        // const usrid = usridarr.join("");
+        // res.send(firestore.collection('userstats').doc(usrid).data().wpm);
+    }
+    catch(error){
+
+        console.log(error.message);
+
+        res.status(400).send(error.message);
     }
 }
 module.exports = {
@@ -132,5 +148,6 @@ module.exports = {
     test_res,
     getrandomtext,
     populate_words,
-    store_usr_data
+    store_usr_data,
+    get_usr_data
 }
