@@ -34,6 +34,7 @@ import { AuthService } from './shared/services/auth.service';
 import { LinFrontPageComponent } from './components/lin-front-page/lin-front-page.component';
 import { LinHeaderComponent } from './components/lin-header/lin-header.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
+import { RefreshComponent } from './components/refresh/refresh.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { UserDataComponent } from './components/user-data/user-data.component';
     ResultComponent,
     LinFrontPageComponent,
     LinHeaderComponent,
-    UserDataComponent
+    UserDataComponent,
+    RefreshComponent
   ],
   imports: [
     BrowserModule,

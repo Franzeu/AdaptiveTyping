@@ -5,19 +5,6 @@
       [testDone]="this.done" 
       (endTimeEvent)="timerDone($event)"
     ></app-timer>
-    <div class="row" *ngIf="authService.userData as user">
-      <div class="col-md-12">
-        <div class="media">
-          
-          <div class="media-body">
-            <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
-            <p>User ID: <strong>{{user.uid}}</strong></p>
-            <p>Email: <strong>{{user.email}}</strong></p>
-            <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
     <app-display-textbox 
       (displaySet)="setTarget($event)" 
       [userInput]="this.userInput"
@@ -27,12 +14,15 @@
       (hasTestStartedEvent)="sendSignalTimer($event)" 
       (testDoneEvent)="typingDone($event)"
       [timeDone]="done"
+      (newInputEvent)="transferInput($event)"
     ></app-typing-textbox>
+    <app-refresh></app-refresh>
     <app-result
       *ngIf="this.done"
       [target]="this.target" 
       [userInput]="this.userInput" 
       [time]="this.time"
     ></app-result>
+    
   </div>
   

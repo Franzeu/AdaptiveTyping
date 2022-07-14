@@ -42,4 +42,8 @@ export class LinFrontPageComponent {
     this.done = true;
     this.time = time;
   }
+
+  transferInput(newInput: String) {
+    this.userInput = newInput;
+  }
 }
