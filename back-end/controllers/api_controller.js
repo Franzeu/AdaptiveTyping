@@ -18,10 +18,14 @@ if word ratio doesn't meet other two conditions return 0.
 */
 function validWord( word, chr, ratio, pastratio)
 {
-    if(ratio <= pastratio) return 2; //exit loop
     let numchars = 0;
     let wordratio;
     console.log('word: ' + word + ' char: ' + chr + ' ratio: ' + ratio + ' pastratio: ' + pastratio);
+    if(ratio <= pastratio){
+        console.log('passed special 2');
+        return 2; //exit loop
+    } 
+
     for (let i = 0; i < word.length; i++){
         if(word[i] == chr) numchars++;
 
@@ -62,8 +66,10 @@ const getrandomtext = async (req,res,next) =>{
     const numwords = 30; //number of words that the textbox displays
 
     try{
-        const usrid = 'po4bTvVvZ3VG0hJsjdoZSC7FE9m1';
-
+        //const usrid = 'po4bTvVvZ3VG0hJsjdoZSC7FE9m1';
+        const usrid = req.params['id'];
+        //console.log('id: ' + req.params['id']);
+        //return;
         const text = await firestore.collection('Words'); //word lists are stored in Words collection 
         const data = await text.get();
         let textArray = [];
@@ -131,7 +137,7 @@ const getrandomtext = async (req,res,next) =>{
                                 break;
                             case 2:
                                 searching = false;
-                                if(wordcache.length) wordcache = str;
+                                if(wordcache.length == 0) wordcache = str;
                                 break;
 
                                  
