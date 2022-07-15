@@ -9,20 +9,40 @@ const { json } = require('body-parser');
 function getRandomInt(max) { //used to return random integer
   return Math.floor(Math.random() * max);
 }
-
-function validWord( word, char, ratio)
+/*checks if word meets or exceeds character ratio
+If current word doesn't meet ratio but has a ratio 
+higher than word in cache return 1.
+If word ratio meets or exceeds ratio requirement 
+return 2.
+if word ratio doesn't meet other two conditions return 0.
+*/
+function validWord( word, chr, ratio, pastratio)
 {
+    if(ratio <= pastratio) return 2; //exit loop
     let numchars = 0;
     let wordratio;
-    console.log('word: ' + word + ' char: ' + char + ' ratio: ' + ratio);
-    //console.log('word char: ' + word[0]);
+    console.log('word: ' + word + ' char: ' + chr + ' ratio: ' + ratio + ' pastratio: ' + pastratio);
     for (let i = 0; i < word.length; i++){
-        if(word[i] == char) numchars++;
+        if(word[i] == chr) numchars++;
 
     }
     wordratio = numchars/word.length;
     console.log('wordratio: ' + wordratio); 
-    return wordratio >= ratio;
+    
+    if(wordratio > pastratio) return 1;// add word to cache
+    else if (wordratio >= ratio) return 2;//exit loop
+    else return 0;// loop again
+    //return ratio
+    //return wordratio >= ratio;
+}
+
+function findWordRatio(word, chr){// finds ratio of  'c' characters in input string
+    let numchars = 0;
+    for (let i = 0; i < word.length; i++){
+        if(word[i] == chr) numchars++;
+
+    }
+    return numchars/word.length;
 }
 
 const test_res = async  (req, res, next) => {
@@ -81,22 +101,46 @@ const getrandomtext = async (req,res,next) =>{
                 for (let i = 0; i < numwords; i++) {
                     let str;
                     let j = 0;
+                    let wordcache = "";
+                    let pastratio = 0.0;
+                    let searching = true;
                     //console.log()
                     let charkey = errorarr[i % len % 5][0];
-                    let charratio = errorarr[i % len % 5][1]/10;                    
+                    let charratio = errorarr[i % len % 5][1]/10;
+
                     if(charratio > 0.8) charratio = 0.8;
                     
                     do {
                         let arr = doc.data()[keys[getRandomInt(keys.length)]];
                         str = arr[getRandomInt(arr.length)];
-                        //console.log('valid word value' + !validWord(str,charkey,charratio));
+                        console.log('wordcache: ' + wordcache);
                         j++;
-                        if(j == numrepeats) charratio -= 0.1;
-                        j = j % numrepeats;
+                        if(j == numrepeats){
+                            charratio -= 0.1;
+                            charratio = charratio.toFixed(4);
+                        }
                         
-                    }while(!validWord(str,charkey,charratio))
+                        j = j % numrepeats;
+
+                        switch (validWord(str,charkey,charratio,pastratio)){
+                            case 0:
+                                break;
+                            case 1:
+                                wordcache = str;
+                                pastratio = findWordRatio(wordcache, charkey);
+                                break;
+                            case 2:
+                                searching = false;
+                                if(wordcache.length) wordcache = str;
+                                break;
+
+                                 
+                        }
+                        
+                        
+                    }while(searching)
                     //console.log('charratio '+ charratio);
-                    textArray.push(str);
+                    textArray.push(wordcache);
                   
 
                     
