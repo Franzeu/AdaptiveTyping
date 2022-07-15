@@ -10,6 +10,21 @@ function getRandomInt(max) { //used to return random integer
   return Math.floor(Math.random() * max);
 }
 
+function validWord( word, char, ratio)
+{
+    let numchars = 0;
+    let wordratio;
+    console.log('word: ' + word + ' char: ' + char + ' ratio: ' + ratio);
+    //console.log('word char: ' + word[0]);
+    for (let i = 0; i < word.length; i++){
+        if(word[i] == char) numchars++;
+
+    }
+    wordratio = numchars/word.length;
+    console.log('wordratio: ' + wordratio); 
+    return wordratio >= ratio;
+}
+
 const test_res = async  (req, res, next) => {
     console.log("test called");
     try{
@@ -21,14 +36,39 @@ const test_res = async  (req, res, next) => {
     }
 };
 
+
+
 const getrandomtext = async (req,res,next) =>{
-    const numwords = 50; //number of words that the textbox displays
-    const numletters = 4; //number of letter array fields in document
+    const numwords = 30; //number of words that the textbox displays
 
     try{
+        const usrid = 'po4bTvVvZ3VG0hJsjdoZSC7FE9m1';
+
         const text = await firestore.collection('Words'); //word lists are stored in Words collection 
         const data = await text.get();
         let textArray = [];
+
+        const usr = await firestore.collection('userstats').doc(usrid); //getting user's frequent errors
+        const usrdata = await usr.get();
+        const usrdoc = usrdata.data();
+        const errorObj = usrdoc.errors;
+        console.log(errorObj);
+        
+        let errorarr = []
+        const numrepeats = 10;
+        for( var character in errorObj){
+            errorarr.push([character,errorObj[character]]);
+        }
+
+        console.log(errorarr);
+        errorarr.sort(function(a, b) {
+            return a[1] - b[1];
+        });
+        errorarr.reverse();
+        console.log(errorarr);
+        console.log(errorarr[0][1]);
+
+        let len = errorarr.length;
 
         if(data.empty){
             res.status(500).send('firestore Words collection is empty');
@@ -37,14 +77,31 @@ const getrandomtext = async (req,res,next) =>{
             data.forEach(doc =>{
 
                 const keys = Object.keys(doc.data());
-                
 
                 for (let i = 0; i < numwords; i++) {
-
-                    let arr = doc.data()[keys[getRandomInt(keys.length)]]
-                    textArray.push(arr[getRandomInt(arr.length)]);
-                }
+                    let str;
+                    let j = 0;
+                    //console.log()
+                    let charkey = errorarr[i % len % 5][0];
+                    let charratio = errorarr[i % len % 5][1]/10;                    
+                    if(charratio > 0.8) charratio = 0.8;
+                    
+                    do {
+                        let arr = doc.data()[keys[getRandomInt(keys.length)]];
+                        str = arr[getRandomInt(arr.length)];
+                        //console.log('valid word value' + !validWord(str,charkey,charratio));
+                        j++;
+                        if(j == numrepeats) charratio -= 0.1;
+                        j = j % numrepeats;
+                        
+                    }while(!validWord(str,charkey,charratio))
+                    //console.log('charratio '+ charratio);
+                    textArray.push(str);
                   
+
+                    
+                }
+                console.log('textarray' + textArray);
                 res.json({english: textArray});
 
             
