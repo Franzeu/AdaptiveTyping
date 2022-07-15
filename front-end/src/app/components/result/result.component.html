@@ -6,5 +6,14 @@
     <div class="accuracyContainer">
         <h2>ACC: {{accuracy}}%</h2>
         <mat-progress-spinner value="{{accuracy}}" ></mat-progress-spinner>
-    </div>    
+    </div>
+
+    <div>
+        <h2>prev WPM: {{ oldWPM }}</h2>
+        <h2>prev ACC: {{ oldAcc }}</h2>
+        <h2>new WPM: {{ wpm }}</h2>
+        <h2>new ACC: {{ accuracy }}</h2>
+        <h1>WPM Improvement: {{ wpmImprovement }}%</h1>
+        <h1>ACC Improvemeent: {{ accImprovement }}%</h1>
+    </div>
 </div>
