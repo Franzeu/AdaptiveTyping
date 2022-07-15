@@ -21,6 +21,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordsComponent } from './components/forgot-passwords/forgot-passwords.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FrontPageComponent } from './components/front-page/front-page.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -35,6 +36,7 @@ import { LinFrontPageComponent } from './components/lin-front-page/lin-front-pag
 import { LinHeaderComponent } from './components/lin-header/lin-header.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { RefreshComponent } from './components/refresh/refresh.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { RefreshComponent } from './components/refresh/refresh.component';
     LinFrontPageComponent,
     LinHeaderComponent,
     UserDataComponent,
-    RefreshComponent
+    RefreshComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ import { RefreshComponent } from './components/refresh/refresh.component';
     HttpClientModule,
     MatProgressSpinnerModule,
     MatButtonModule,
+    MatDialogModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
