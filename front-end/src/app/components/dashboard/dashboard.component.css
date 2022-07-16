@@ -1,0 +1,25 @@
+.container-fluid{
+    width: 1032px;
+    margin: auto;
+}
+
+.inner-adjust{
+    margin-top: 50px;
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 1.25rem;
+    color: #444444;
+}
+
+.h2{
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 1.75rem;
+    color: #444444;
+}
+.sidebar-sticky {
+    margin: 40px;
+    width: 1032px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: auto;
+}

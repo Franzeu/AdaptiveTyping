@@ -153,13 +153,8 @@ const getrandomtext = async (req,res,next) =>{
                 }
                 console.log('textarray' + textArray);
                 res.json({english: textArray});
-
-            
             })
-            
         }
-
-            
     }
 
     catch(error){
@@ -198,10 +193,9 @@ const populate_words = async (req, res, next) => {
                     }
             });
             
-            
         }
 
-        res.send('Words collection successfully populated'); 
+        res.send('Words Firestore Collection successfully populated'); 
     }
 
     catch (error) {
@@ -218,9 +212,8 @@ const store_usr_data = async(req, res, next) => {
         
         console.log('store data called');
         await firestore.collection('userstats').doc(usrid).set(req.body);
-        
 
-        res.send('data received');
+        res.send('User Data Received');
 
 
     }
@@ -237,11 +230,14 @@ const get_usr_data = async(req, res, next) => {
     try {
 
         const url = req.url;
-        console.log(url.slice(10));
-        
-        // const usridarr = Object.values(req.body.uid);
-        // const usrid = usridarr.join("");
-        // res.send(firestore.collection('userstats').doc(usrid).data().wpm);
+        const criteria = JSON.parse(decodeURIComponent(url.slice(21)));
+        const usrid = criteria[0].uid;
+        console.log('uid:', criteria[0].uid);
+
+        let userDoc  = await firestore.collection('userstats').doc(usrid);
+        let stats = await userDoc.get();
+        res.json(stats.data());
+
     }
     catch(error){
 
@@ -250,6 +246,7 @@ const get_usr_data = async(req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+
 module.exports = {
 
     test_res,

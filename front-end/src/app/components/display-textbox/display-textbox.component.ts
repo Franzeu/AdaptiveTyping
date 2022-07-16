@@ -23,7 +23,10 @@ export class DisplayTextboxComponent implements OnInit{
       this.data = response;
       this.isLoaded = true;
       this.words = this.data.english.join(' ');
+<<<<<<< HEAD
       //this.words = "hello word"
+=======
+>>>>>>> master
       this.displaySet.emit(this.words);
     
       for (let i = 0; i < this.words.length; i++) {
