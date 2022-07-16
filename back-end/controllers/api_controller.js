@@ -273,7 +273,19 @@ const get_usr_data = async(req, res, next) => {
         console.log('uid:', criteria[0].uid);
 
         let userDoc  = await firestore.collection('userstats').doc(usrid);
+       // const user: userStats = { uid:this.authService.userData.uid, wpm:wpmNum, accuracy:accNum, errors:errorDictionary }
+        userDoc.get()
+        .then((docSnapshot) => {
+            if (!docSnapshot.exists) {
+                userDoc.onSnapshot((doc) => {
+                    userDoc.set({ uid:usrid, wpm:0, accuracy:0, errors:{} });
+                    console.log('created new data');
+              });
+            } 
+        });
+        
         let stats = await userDoc.get();
+        //console.log('stats length: ' + stats.data().length);
         res.json(stats.data());
 
     }
