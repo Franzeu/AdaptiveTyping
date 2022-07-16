@@ -75,6 +75,16 @@ const getrandomadapttext = async (req,res,next) =>{
         let textArray = [];
 
         const usr = await firestore.collection('userstats').doc(usrid); //getting user's frequent errors
+
+        usr.get()
+        .then((docSnapshot) => {
+            if (!docSnapshot.exists) {
+                usr.onSnapshot((doc) => {
+                    usr.set({ uid:usrid, wpm:0, accuracy:0, errors:{} });
+              });
+            } 
+        });
+
         const usrdata = await usr.get();
         const usrdoc = usrdata.data();
         const errorObj = usrdoc.errors;
@@ -85,75 +95,95 @@ const getrandomadapttext = async (req,res,next) =>{
         for( var character in errorObj){
             errorarr.push([character,errorObj[character]]);
         }
-
-        console.log(errorarr);
-        errorarr.sort(function(a, b) {
-            return a[1] - b[1];
-        });
-        errorarr.reverse();
-        console.log(errorarr);
-        console.log(errorarr[0][1]);
-
         let len = errorarr.length;
+        console.log('errorar length: '+ len);
+
+        console.log('errorarr ' + errorarr);
+        if(len > 0){
+            errorarr.sort(function(a, b) {
+                return a[1] - b[1];
+            });
+            errorarr.reverse();
+        }
+        
+        console.log('errorpos');
+
+        
 
         if(data.empty){
             res.status(500).send('firestore Words collection is empty');
         }
         else{
-            data.forEach(doc =>{
+            if(len > 0){
+                data.forEach(doc =>{
 
-                const keys = Object.keys(doc.data());
+                    const keys = Object.keys(doc.data());
 
-                for (let i = 0; i < numwords; i++) {
-                    let str;
-                    let j = 0;
-                    let wordcache = "";
-                    let pastratio = 0.0;
-                    let searching = true;
-                    //console.log()
-                    let charkey = errorarr[i % len % 5][0];
-                    let charratio = errorarr[i % len % 5][1]/10;
+                    for (let i = 0; i < numwords; i++) {
+                        let str;
+                        let j = 0;
+                        let wordcache = "";
+                        let pastratio = 0.0;
+                        let searching = true;
+                        let charkey = errorarr[i % len % 5][0];
+                        let charratio = errorarr[i % len % 5][1]/10;
 
-                    if(charratio > 0.8) charratio = 0.8;
+                        if(charratio > 0.8) charratio = 0.8;
+                        
+                        do {
+                            let arr = doc.data()[keys[getRandomInt(keys.length)]];
+                            str = arr[getRandomInt(arr.length)];
+                            console.log('wordcache: ' + wordcache);
+                            j++;
+                            if(j == numrepeats){
+                                charratio -= 0.1;
+                                charratio = charratio.toFixed(4);
+                            }
+                            
+                            j = j % numrepeats;
+
+                            switch (validWord(str,charkey,charratio,pastratio)){
+                                case 0:
+                                    break;
+                                case 1:
+                                    wordcache = str;
+                                    pastratio = findWordRatio(wordcache, charkey);
+                                    break;
+                                case 2:
+                                    searching = false;
+                                    if(wordcache.length == 0) wordcache = str;
+                                    break;
+
+                                    
+                            }
+                            
+                            
+                        }while(searching)
+                        //console.log('charratio '+ charratio);
+                        textArray.push(wordcache);
                     
-                    do {
-                        let arr = doc.data()[keys[getRandomInt(keys.length)]];
-                        str = arr[getRandomInt(arr.length)];
-                        console.log('wordcache: ' + wordcache);
-                        j++;
-                        if(j == numrepeats){
-                            charratio -= 0.1;
-                            charratio = charratio.toFixed(4);
-                        }
-                        
-                        j = j % numrepeats;
 
-                        switch (validWord(str,charkey,charratio,pastratio)){
-                            case 0:
-                                break;
-                            case 1:
-                                wordcache = str;
-                                pastratio = findWordRatio(wordcache, charkey);
-                                break;
-                            case 2:
-                                searching = false;
-                                if(wordcache.length == 0) wordcache = str;
-                                break;
-
-                                 
-                        }
                         
-                        
-                    }while(searching)
-                    //console.log('charratio '+ charratio);
-                    textArray.push(wordcache);
-                  
+                    }
+                    console.log('textarray' + textArray);
+                    res.json({english: textArray});
+                })
+            }
+            else{ // if user has no characters errors
+                data.forEach(doc =>{
 
+                    const keys = Object.keys(doc.data());
                     
-                }
-                console.log('textarray' + textArray);
-                res.json({english: textArray});
-            })
+    
+                    for (let i = 0; i < numwords; i++) {
+    
+                        let arr = doc.data()[keys[getRandomInt(keys.length)]]
+                        textArray.push(arr[getRandomInt(arr.length)]);
+                    }
+                      
+                    res.json({english: textArray});
+                })
+            }
         }
     }
 
