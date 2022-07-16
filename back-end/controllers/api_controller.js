@@ -103,8 +103,35 @@ const store_usr_data = async(req, res, next) => {
         const usridarr = Object.values(req.body.uid);
         const usrid = usridarr.join("");
         
-        console.log('store data called');
-        await firestore.collection('userstats').doc(usrid).set(req.body);
+        const userDoc = await firestore.collection('userstats').doc(usrid);
+        userDoc.get()
+        .then((docSnapshot) => {
+            if (!docSnapshot.exists) {
+                userDoc.onSnapshot((doc) => {
+                    doc.set(req.body);
+                    console.log('Initial data for user');
+              });
+            } else {
+                const path = 'errors.';
+                
+                for (var key in req.body.errors) {
+                    
+                    let field = path + key;
+                    console.log(field);
+                    userDoc.update({
+                        [field] : app.firestore.FieldValue.increment(1)
+                    }
+                    )
+                }
+
+                userDoc.update({
+                    wpm: req.body.wpm,
+                    accuracy: req.body.accuracy
+                })
+            } 
+        });
+
+        // await firestore.collection('userstats').doc(usrid).set(req.body);
 
         res.send('User Data Received');
 
@@ -125,7 +152,6 @@ const get_usr_data = async(req, res, next) => {
         const url = req.url;
         const criteria = JSON.parse(decodeURIComponent(url.slice(21)));
         const usrid = criteria[0].uid;
-        console.log('uid:', criteria[0].uid);
 
         let userDoc  = await firestore.collection('userstats').doc(usrid);
        // const user: userStats = { uid:this.authService.userData.uid, wpm:wpmNum, accuracy:accNum, errors:errorDictionary }
