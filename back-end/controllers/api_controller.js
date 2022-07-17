@@ -64,7 +64,7 @@ const test_res = async  (req, res, next) => {
 
 const getrandomadapttext = async (req,res,next) =>{
     const numwords = 30; //number of words that the textbox displays
-
+    console.log("called get getrandomadapttext");
     try{
         //const usrid = 'po4bTvVvZ3VG0hJsjdoZSC7FE9m1';
         const usrid = req.params['id'];
@@ -88,7 +88,7 @@ const getrandomadapttext = async (req,res,next) =>{
         const usrdata = await usr.get();
         const usrdoc = usrdata.data();
         const errorObj = usrdoc.errors;
-        console.log(errorObj);
+        //console.log(errorObj);
         
         let errorarr = []
         const numrepeats = 10;
@@ -96,9 +96,9 @@ const getrandomadapttext = async (req,res,next) =>{
             errorarr.push([character,errorObj[character]]);
         }
         let len = errorarr.length;
-        console.log('errorar length: '+ len);
+        //console.log('errorar length: '+ len);
 
-        console.log('errorarr ' + errorarr);
+        //console.log('errorarr ' + errorarr);
         if(len > 0){
             errorarr.sort(function(a, b) {
                 return a[1] - b[1];
@@ -106,7 +106,7 @@ const getrandomadapttext = async (req,res,next) =>{
             errorarr.reverse();
         }
         
-        console.log('errorpos');
+        //console.log('errorpos');
 
         
 
@@ -165,7 +165,7 @@ const getrandomadapttext = async (req,res,next) =>{
 
                         
                     }
-                    console.log('textarray' + textArray);
+                    //console.log('textarray' + textArray);
                     res.json({english: textArray});
                 })
             }
@@ -197,7 +197,7 @@ const getrandomadapttext = async (req,res,next) =>{
 const getrandomtext = async (req,res,next) =>{
     const numwords = 50; //number of words that the textbox displays
     const numletters = 4; //number of letter array fields in document
-
+    console.log("called get randomtext");
     try{
         const text = await firestore.collection('Words'); //word lists are stored in Words collection 
         const data = await text.get();
