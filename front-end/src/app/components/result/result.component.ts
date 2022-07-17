@@ -61,7 +61,7 @@ export class ResultComponent implements OnInit, DoCheck {
       const errorArray = [];
       var errorDictionary: { [key: string]: any } = {};
 
-      for (let i = 0; i < targetArray.length; i++) {
+      for (let i = 0; i < targetArray.length && i < inputArray.length; i++) {
         if (targetArray[i] !== inputArray[i]) {
           for (let x = 0; x < targetArray[i].length; x++){
             if (targetArray[i][x] !== inputArray[i][x]) {
