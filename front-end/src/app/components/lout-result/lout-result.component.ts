@@ -1,10 +1,5 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { User } from 'src/app/shared/services/user';
-import { userStats } from 'src/app/shared/services/userStats';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { NumberValueAccessor } from '@angular/forms';
+import { HttpHeaders} from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders(

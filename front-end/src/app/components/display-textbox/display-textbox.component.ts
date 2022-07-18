@@ -26,27 +26,6 @@ export class DisplayTextboxComponent implements OnInit{
   constructor(private wordService: WordsService, private authService: AuthService, private http: HttpClient) { }
 
   ngOnInit(): void {  
-    //this.getID();
-    console.log('init');
-    console.log(this.authService.userData);
-    
-    /* if (this.authService.userData !== undefined) {
-      this.getText().subscribe((response) => {
-        this.once = true;
-        this.data = response;
-        this.isLoaded = true;
-        this.words = this.data.english.join(' ');
-        this.displaySet.emit(this.words);
-        console.log("inside");
-      
-        for (let i = 0; i < this.words.length; i++) {
-          let newSpan = "<span class='default'>" + this.words[i] + "</span>";
-          this.htmlStr += newSpan;
-          
-        }
-      });
-    } */
-      
   }
 
   ngDoCheck(): void {
@@ -58,7 +37,6 @@ export class DisplayTextboxComponent implements OnInit{
           this.isLoaded = true;
           this.words = this.data.english.join(' ');
           this.displaySet.emit(this.words);
-          console.log("inside");
         
           for (let i = 0; i < this.words.length; i++) {
             let newSpan = "<span class='default'>" + this.words[i] + "</span>";
@@ -96,14 +74,6 @@ export class DisplayTextboxComponent implements OnInit{
         }
     }
   }
-
-/*   getID(): void{
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const usrid = this.authService.userData.uid;
-    this.haveuid = true;
-    console.log('user uid? ' + usrid);
-  } */
 
   getText(): Observable<Word> {
       const apiURL = 'http://localhost:4000/api/randomtext/' + this.authService.userData.uid;

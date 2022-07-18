@@ -23,6 +23,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -40,6 +42,7 @@ import { RefreshComponent } from './components/refresh/refresh.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoutDisplayTextboxComponent } from './components/lout-display-textbox/lout-display-textbox.component';
 import { LoutResultComponent } from './components/lout-result/lout-result.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -80,7 +83,9 @@ import { LoutResultComponent } from './components/lout-result/lout-result.compon
     MatButtonModule,
     MatDialogModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    NgChartsModule,
+    MatFormFieldModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

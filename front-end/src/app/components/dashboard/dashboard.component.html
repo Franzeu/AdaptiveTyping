@@ -43,6 +43,21 @@
                 <p>Average WPM:</p>
                 <p>Average Accuracy:</p>
                 <p>Top frequent mistakes: </p>
+                <div style="display: flex;">
+                  <canvas *ngIf="isLoaded" baseChart width="400" height="400"
+                    [type]="'line'"
+                    [data]="lineChartDataWPM"
+                    [options]="lineChartOptions"
+                    [legend]="lineChartLegend">
+                  </canvas>
+
+                  <canvas *ngIf="isLoaded" baseChart width="400" height="400"
+                    [type]="'line'"
+                    [data]="lineChartDataAcc"
+                    [options]="lineChartOptions"
+                    [legend]="lineChartLegend">
+                  </canvas>
+                </div>
               </div>
             </div>
           </div>
