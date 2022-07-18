@@ -5,11 +5,10 @@
     [testDone]="this.done" 
     (endTimeEvent)="timerDone($event)"
   ></app-timer>
-  
-  <app-display-textbox 
+  <app-lout-display-textbox 
     (displaySet)="setTarget($event)" 
     [userInput]="this.userInput"
-  ></app-display-textbox>
+  ></app-lout-display-textbox>
   <app-typing-textbox 
     [target]="this.target" 
     (hasTestStartedEvent)="sendSignalTimer($event)" 
@@ -17,11 +16,12 @@
     [timeDone]="done"
     (newInputEvent)="transferInput($event)"
   ></app-typing-textbox>
-  <app-result
+  <app-refresh></app-refresh>
+  <app-lout-result
     *ngIf="this.done"
     [target]="this.target" 
     [userInput]="this.userInput" 
     [time]="this.time"
-  ></app-result>
-  <app-refresh></app-refresh>
+  ></app-lout-result>
+  
 </div>
