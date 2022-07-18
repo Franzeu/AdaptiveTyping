@@ -41,6 +41,7 @@ import { RefreshComponent } from './components/refresh/refresh.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoutDisplayTextboxComponent } from './components/lout-display-textbox/lout-display-textbox.component';
 import { LoutResultComponent } from './components/lout-result/lout-result.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { LoutResultComponent } from './components/lout-result/lout-result.compon
     MatButtonModule,
     MatDialogModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    NgChartsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
