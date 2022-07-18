@@ -1,10 +1,8 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { User } from 'src/app/shared/services/user';
 import { userStats } from 'src/app/shared/services/userStats';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { NumberValueAccessor } from '@angular/forms';
 
 const httpOptions = {
   headers: new HttpHeaders(
@@ -38,6 +36,8 @@ export class ResultComponent implements OnInit, DoCheck {
   newAvgAcc!: string;
   wpmImprovement!: string;
   accImprovement!: string;
+  gainWPM: boolean = false;
+  gainAcc: boolean = false;
   private userURL = 'http://localhost:4000/api/strusrdata';
   private statsURL = 'http://localhost:4000/api/gtusrdata';
 
@@ -121,6 +121,12 @@ export class ResultComponent implements OnInit, DoCheck {
       // (new - old) / old
       this.wpmImprovement = ((Number(this.newAvgWPM) - this.oldAvgWPM) / this.oldAvgWPM * 100).toFixed(2);
       this.accImprovement = ((Number(this.newAvgAcc) - this.oldAvgAcc) / this.oldAvgAcc * 100).toFixed(2);
+      if (Number(this.wpmImprovement) >= 0) {
+        this.gainWPM = true;
+      }
+      if (Number(this.accImprovement) >= 0) {
+        this.gainAcc = true;
+      }
     }
   
   }

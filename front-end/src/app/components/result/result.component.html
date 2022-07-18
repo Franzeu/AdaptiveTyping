@@ -5,12 +5,10 @@
     </div>
     
     <div class="statsContainer">
-        <h2>prev avgWPM: {{ oldAvgWPM }}</h2>
-        <h2>prev avgACC: {{ oldAvgAcc }}%</h2>
-        <h2>new avgWPM: {{ newAvgWPM }}</h2>
-        <h2>new avgACC: {{ newAvgAcc }}%</h2>
-        <h2>WPM Improvement: {{ wpmImprovement }}%</h2>
-        <h2>ACC Improvemeent: {{ accImprovement }}%</h2>
+        <h2 *ngIf="gainWPM">WPM Improvement: <span class="gain">{{ wpmImprovement }}%</span></h2>
+        <h2 *ngIf="!gainWPM">WPM Improvement: <span class="loss">{{ wpmImprovement }}%</span></h2>
+        <h2 *ngIf="gainAcc">ACC Improvemeent: <span class="gain">{{ accImprovement }}%</span></h2>
+        <h2 *ngIf="!gainAcc">ACC Improvemeent: <span class="loss">{{ accImprovement }}%</span></h2>
     </div>
 </div>
 <br>
