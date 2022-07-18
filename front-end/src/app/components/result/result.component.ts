@@ -32,8 +32,10 @@ export class ResultComponent implements OnInit, DoCheck {
   numberWPM!: number;
   pastWPM: any[] = [];
   pastAcc: any[] = [];
-  avgWPM: number = 0;
-  avgAcc: number = 0;
+  oldAvgWPM: number = 0;
+  oldAvgAcc: number = 0;
+  newAvgWPM!: string;
+  newAvgAcc!: string;
   wpmImprovement!: string;
   accImprovement!: string;
   private userURL = 'http://localhost:4000/api/strusrdata';
@@ -45,31 +47,26 @@ export class ResultComponent implements OnInit, DoCheck {
     // Make sure old user stats are read in
     this.getUserStats().subscribe((response) => {
     
-      this.pastWPM = response.pastAcc;
-      this.pastAcc = response.pastWpm;
+      this.pastWPM = response.pastWpm;
+      this.pastAcc = response.pastAcc;
 
-      console.log(response);
-      console.log(this.pastWPM);
       if (this.pastWPM !== undefined) {
         for (var entry of this.pastWPM) {
         
-        this.avgWPM += entry;
+        this.oldAvgWPM += entry;
         }
-        this.avgWPM /= this.pastWPM.length;
+        this.oldAvgWPM /= this.pastWPM.length;
       }
       
       if (this.pastAcc !== undefined) {
         for (var entry of this.pastAcc) {
         
-        this.avgAcc += entry;
+        this.oldAvgAcc += entry;
         }
 
-        this.avgAcc /= this.pastAcc.length;
+        this.oldAvgAcc /= this.pastAcc.length;
       }
-      
 
-      console.log(this.pastWPM);
-      console.log(this.pastAcc);
       this.isLoaded = true;
     });
   }
@@ -119,16 +116,11 @@ export class ResultComponent implements OnInit, DoCheck {
         this.once = true;
       }
 
-      if (this.avgWPM && this.avgAcc){
-        this.wpm = Number(this.wpm + this.avgWPM / 2).toFixed(2);
-        this.accuracy = Number((this.accuracy + this.avgAcc / 2)).toFixed(2);
-      } else {
-        this.wpm = "Submit more tests!"
-        this.accuracy = "Submit more tests!"
-      }
+      this.newAvgWPM = ((Number(this.wpm) + this.oldAvgWPM) / 2).toFixed(2);
+      this.newAvgAcc = ((Number(this.accuracy) + this.oldAvgAcc) / 2).toFixed(2);
       // (new - old) / old
-      this.wpmImprovement = ((Number(this.wpm) - this.avgWPM) / this.avgWPM * 100).toFixed(2);
-      this.accImprovement = ((Number(this.accuracy) - this.avgAcc) / this.avgAcc * 100).toFixed(2);
+      this.wpmImprovement = ((Number(this.newAvgWPM) - this.oldAvgWPM) / this.oldAvgWPM * 100).toFixed(2);
+      this.accImprovement = ((Number(this.newAvgAcc) - this.oldAvgAcc) / this.oldAvgAcc * 100).toFixed(2);
     }
   
   }
