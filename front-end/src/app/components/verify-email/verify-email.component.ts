@@ -7,7 +7,7 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrls: ['./verify-email.component.css']
 })
 export class VerifyEmailComponent implements OnInit {
-
+  title: string = "AdaptiveTyping"
   constructor(
     public authService: AuthService
   ) { }

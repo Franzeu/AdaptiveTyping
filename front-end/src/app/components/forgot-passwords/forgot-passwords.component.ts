@@ -6,7 +6,7 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrls: ['./forgot-passwords.component.css']
 })
 export class ForgotPasswordsComponent implements OnInit {
-
+  title: string = "AdaptiveTyping"
   constructor(
     public authService: AuthService
   ) { }

@@ -1,7 +1,75 @@
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.75rem;
+    color: #FEFBF3;
+}
+
+h3{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.25rem;
+    color: #FEFBF3;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #FEFBF3;
+}
+
+::ng-deep .mat-input-element {
+    caret-color: #FEFBF3!important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label .mat-input-element{
+    color: #FEFBF3!important;
+}
+
+mat-label {
+    color: #FEFBF3 !important;
+}
+
+::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
+    background-color: #FEFBF3 !important;
+}
+
+button{
+    width: 250px;
+    background-color: #575757;
+    color: #FEFBF3;
+}
+
 .displayTable{
     margin: auto;
-    width: 500px;
+    width: 350px;
     display: flex;
     justify-content: center;
+    text-align: center;
     margin-top: 40px;
+    background-color: #444444;
+    border: 2px;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    
+}
+
+.form-field{
+    width: 100%;
+    
+}
+.mat-form-field-outline,
+.mat-form-field-empty.mat-form-field-label,
+.mat-form-field-label,
+.mat-form-field-underline,
+.mat-input-element,
+::placeholder {
+    color: #FEFBF3 !important;
+}
+
+.redirect{
+    cursor: pointer;
+}
+
+.redirect:hover{
+    text-decoration: underline;
+    text-decoration-color: #FEFBF3;
 }

@@ -54,7 +54,6 @@ button{
 
 .form-field{
     width: 100%;
-    color: white;
     
 }
 .mat-form-field-outline,
@@ -64,5 +63,21 @@ button{
 .mat-input-element,
 ::placeholder {
     color: #FEFBF3 !important;
-  }
+}
 
+.forgotPassword{
+    cursor: pointer;
+}
+.forgotPassword:hover{
+    text-decoration: underline;
+    text-decoration-color: #FEFBF3;
+}
+
+.redirect{
+    cursor: pointer;
+}
+
+.redirect:hover{
+    text-decoration: underline;
+    text-decoration-color: #FEFBF3;
+}

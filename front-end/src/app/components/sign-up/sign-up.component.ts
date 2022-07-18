@@ -7,7 +7,7 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
+  title: string = "AdaptiveTyping"
   constructor(
     public authService: AuthService
   ) { }

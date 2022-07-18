@@ -5,8 +5,7 @@
 
       <div class="formGroup" *ngIf="authService.userData as user">
         <p class="text-center">
-          We have sent a confirmation email to <strong>{{ user.email }}</strong
-          >.
+          We have sent a confirmation email to <u><strong>{{ user.email }}</strong></u>.
         </p>
         <p class="text-center">
           Please check your email and click on the link to verfiy your email
@@ -17,6 +16,7 @@
       <!-- Calling SendVerificationMail() method using authService Api -->
       <div class="formGroup">
         <button
+          mat-raised-button
           type="button"
           class="btn btnPrimary"
           (click)="authService.SendVerificationMail()"
@@ -26,13 +26,10 @@
         </button>
       </div>
     </div>
-
+    <br>
     <div class="redirectToLogin">
-      <span
-        >Go back to?<span class="redirect" routerLink="/sign-in">
-          Sign in</span
-        ></span
-      >
+      <p><span>Go back to <span class="redirect" routerLink="/sign-in">Sign In</span></span></p>
+      
     </div>
   </div>
 </div>

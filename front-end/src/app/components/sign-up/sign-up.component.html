@@ -1,41 +1,41 @@
 <div class="displayTable">
   <div class="displayTableCell">
     <div class="authBlock">
+      <h1 id="title"><i class="fa-solid fa-keyboard"></i> {{ title }}</h1>
       <h3>Sign Up</h3>
 
       <div class="formGroup">
-        <input
-          type="email"
-          class="formControl"
-          placeholder="Email Address"
-          #userEmail
-          required
-        />
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Email Address</mat-label>
+          <input matInput type="email" class="formControl" #userEmail required/>
+        </mat-form-field>
       </div>
 
       <div class="formGroup">
-        <input
-          type="password"
-          class="formControl"
-          placeholder="Password"
-          #userPwd
-          required
-        />
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" class="formControl" #userPwd required/>
+        </mat-form-field>
+        
       </div>
-
+      <br>
       <div class="formGroup">
-        <input
+        <button mat-raised-button  type="button"
+        class="btn btnPrimary"
+        value="Sign Up"
+        (click)="authService.SignUp(userEmail.value, userPwd.value)"> Sign Up</button>
+        <!-- <input
           type="button"
           class="btn btnPrimary"
           value="Sign Up"
           (click)="authService.SignUp(userEmail.value, userPwd.value)"
-        />
+        /> -->
       </div>
-
+      <br>
       <div class="formGroup">
-        <span class="or"><span class="orInner">Or</span></span>
+        <p><span class="or"><span class="orInner">Or</span></span></p>
+        
       </div>
-
       <!-- Continue with Google -->
       <div class="formGroup">
         <button
@@ -49,14 +49,14 @@
         </button>
       </div>
     </div>
-
+    <br>
     <div class="redirectToLogin">
-      <span
+      <p><span
         >Already have an account?
         <span class="redirect" routerLink="/sign-in">Log In</span></span
-      >
+      ></p>
+      
     </div>
-
     <!--Go Back To typing test-->
     
     <div class="formGroup">
