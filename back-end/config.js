@@ -5,16 +5,16 @@ const assert = require('assert');
 dotenv.config();
 
 const {
-    PORT="4000",
-    HOST="localhost",
-    HOST_URL="http://localhost:4000/",
-    API_KEY="AIzaSyBVu8ri-X1eGYl9hGWin6K68j0txlWyoZQ",
-    AUTH_DOMAIN="adaptivetyping-b4add.firebaseapp.com",
-    PROJECT_ID="adaptivetyping-b4add",
-    STORAGE_BUCKET="adaptivetyping-b4add.appspot.com",
-    MESSAGING_SENDER_ID="243073456957",
-    APP_ID="1:243073456957:web:068aaa0bd8b6f9b01e8354",
-    MEASUREMENT_ID="G-XD50N8BQQ4"
+    PORT,
+    HOST,
+    HOST_URL,
+    API_KEY,
+    AUTH_DOMAIN,
+    PROJECT_ID,
+    STORAGE_BUCKET,
+    MESSAGING_SENDER_ID,
+    APP_ID,
+    MEASUREMENT_ID
 } = process.env;
 
 assert(PORT, 'PORT is required');
