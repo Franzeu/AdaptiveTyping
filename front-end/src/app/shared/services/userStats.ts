@@ -3,4 +3,6 @@ export interface userStats {
     wpm: number;
     accuracy: number;
     errors: {};
+    pastWpm: [];
+    pastAcc: [];
 }

@@ -8,6 +8,8 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
+  title: string = "AdaptiveTyping"
+
   constructor(public authService: AuthService) {}
   ngOnInit(): void {}
 

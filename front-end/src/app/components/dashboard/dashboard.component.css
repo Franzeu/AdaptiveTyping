@@ -1,3 +1,9 @@
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.75rem;
+    color: #444444;
+}
+
 .container-fluid{
     width: 1032px;
     margin: auto;
@@ -10,16 +16,28 @@
     color: #444444;
 }
 
-.h2{
+.user-profile-title{
     font-family: 'Roboto Mono', sans-serif;
     font-size: 1.75rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
     color: #444444;
+    
 }
 .sidebar-sticky {
     margin: 40px;
     width: 1032px;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
     margin-left: auto;
 }
+
+.media-body{
+    border: 2px;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11);
+}
+
