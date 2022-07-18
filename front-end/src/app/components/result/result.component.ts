@@ -30,8 +30,10 @@ export class ResultComponent implements OnInit, DoCheck {
   wpm!: string;
   accuracy!: string;
   numberWPM!: number;
-  oldWPM!: number;
-  oldAcc!: number;
+  pastWPM: any[] = [];
+  pastAcc: any[] = [];
+  avgWPM: number = 0;
+  avgAcc: number = 0;
   wpmImprovement!: string;
   accImprovement!: string;
   private userURL = 'http://localhost:4000/api/strusrdata';
@@ -42,10 +44,32 @@ export class ResultComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     // Make sure old user stats are read in
     this.getUserStats().subscribe((response) => {
-      this.oldWPM = response.wpm;
-      this.oldAcc = response.accuracy;
-      console.log(this.oldWPM);
-      console.log(this.oldAcc);
+    
+      this.pastWPM = response.pastAcc;
+      this.pastAcc = response.pastWpm;
+
+      console.log(response);
+      console.log(this.pastWPM);
+      if (this.pastWPM !== undefined) {
+        for (var entry of this.pastWPM) {
+        
+        this.avgWPM += entry;
+        }
+        this.avgWPM /= this.pastWPM.length;
+      }
+      
+      if (this.pastAcc !== undefined) {
+        for (var entry of this.pastAcc) {
+        
+        this.avgAcc += entry;
+        }
+
+        this.avgAcc /= this.pastAcc.length;
+      }
+      
+
+      console.log(this.pastWPM);
+      console.log(this.pastAcc);
       this.isLoaded = true;
     });
   }
@@ -54,6 +78,7 @@ export class ResultComponent implements OnInit, DoCheck {
     // Make sure this only happens after old data are read
     if (this.isLoaded) {
       this.wpm = ((this.userInput.length / 5) / ((60 - this.time) / 60)).toFixed(2);
+      
 
       // Split string by white spaces
       const targetArray = this.target.split(/(\s+)/).filter( str => str.trim().length > 0)
@@ -61,11 +86,12 @@ export class ResultComponent implements OnInit, DoCheck {
       const errorArray = [];
       var errorDictionary: { [key: string]: any } = {};
 
+      // Stores the mistakes that user makes on the typing test into a dictionary and array.
       for (let i = 0; i < targetArray.length && i < inputArray.length; i++) {
         if (targetArray[i] !== inputArray[i]) {
           for (let x = 0; x < targetArray[i].length; x++){
             if (targetArray[i][x] !== inputArray[i][x]) {
-              // Checks if the letter is already in the errorDictionary. If it is, increment by 1, and if it isn't create a key/value
+  
               if(errorDictionary.hasOwnProperty(targetArray[i][x])){
                 errorDictionary[targetArray[i][x]] = errorDictionary[targetArray[i][x]] + 1;
               }
@@ -82,28 +108,36 @@ export class ResultComponent implements OnInit, DoCheck {
       let tempStr = targetArray.join("");
       // # of correct letter / # of letters
       this.accuracy = ((tempStr.length - errorArray.length) / tempStr.length * 100).toFixed(2);
-
-      // (new - old) / old
-      this.wpmImprovement = ((Number(this.wpm) - this.oldWPM) / this.oldWPM * 100).toFixed(2);
-      this.accImprovement = ((Number(this.accuracy) - this.oldAcc) / this.oldAcc * 100).toFixed(2);
-
+      
       // Send new user data to database
       if (!this.once) {
         const wpmNum = Number(this.wpm);
         const accNum = Number(this.accuracy);
         // Sends an error dictionary to the backend. Key is the letter and the value is the amount of times the user misses the character.
-        const user: userStats = { uid:this.authService.userData.uid, wpm:wpmNum, accuracy:accNum, errors:errorDictionary };
+        const user: userStats = { uid:this.authService.userData.uid, wpm:wpmNum, accuracy:accNum, errors:errorDictionary, pastWpm:[], pastAcc:[] };
         this.updateData(user).subscribe(response => console.log(response));
         this.once = true;
       }
+
+      if (this.avgWPM && this.avgAcc){
+        this.wpm = Number(this.wpm + this.avgWPM / 2).toFixed(2);
+        this.accuracy = Number((this.accuracy + this.avgAcc / 2)).toFixed(2);
+      } else {
+        this.wpm = "Submit more tests!"
+        this.accuracy = "Submit more tests!"
+      }
+      // (new - old) / old
+      this.wpmImprovement = ((Number(this.wpm) - this.avgWPM) / this.avgWPM * 100).toFixed(2);
+      this.accImprovement = ((Number(this.accuracy) - this.avgAcc) / this.avgAcc * 100).toFixed(2);
     }
   
   }
-
+  // Function that updates the user's WPM, accuracy, errors, past WPM, and past accuracy in the database
   updateData(user: userStats): Observable<userStats> {
     return this.http.post<userStats>(this.userURL, user, httpOptions);
   }
-
+  
+  // Function that obtains the user's stats/data from the database
   getUserStats(): Observable<userStats>{
     const criteria = [ {uid: this.authService.userData.uid} ];
     return this.http.get<userStats>(this.statsURL + "/?criteria=" + encodeURIComponent( JSON.stringify(criteria)));

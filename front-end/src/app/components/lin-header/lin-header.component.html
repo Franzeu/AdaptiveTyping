@@ -2,10 +2,12 @@
     <div class="title">
       <h1><i class="fa-solid fa-keyboard"></i> {{ title }}</h1>
       
-        <button mat-button [matMenuTriggerFor]="menu"><h1><i class="fa-solid fa-circle-user fa-lg"></i></h1></button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="goToDashboard()"><i class="fa-solid fa-user"></i> My Profile</button>
-          <button mat-menu-item type="button" class="nav-link" (click)="authService.SignOut()" > <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
-        </mat-menu>
+      <button class="btn1" mat-fab [matMenuTriggerFor]="menu">
+        <h1><i class="fa-solid fa-circle-user fa-lg"></i></h1>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="goToDashboard()"><i class="fa-solid fa-user"></i> My Profile</button>
+        <button mat-menu-item class="nav-link" (click)="authService.SignOut()" > <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+      </mat-menu>
     </div>
 </header>

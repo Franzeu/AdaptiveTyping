@@ -60,7 +60,48 @@ const test_res = async  (req, res, next) => {
     }
 };
 
+const getTopMistakes = async (req,res,next) =>{
+    console.log('called getTopMistakes');
+    try{
+        const usrid = req.params['id'];
+        const usr = await firestore.collection('userstats').doc(usrid); //getting user's frequent errors
 
+        usr.get()
+        .then((docSnapshot) => {
+            if (!docSnapshot.exists) {
+                usr.onSnapshot((doc) => {
+                    usr.set({ uid:usrid, wpm:0, accuracy:0, errors:{} });
+            });
+            } 
+        });
+
+        const usrdata = await usr.get();
+        const usrdoc = usrdata.data();
+        const errorObj = usrdoc.errors;
+
+        let errorarr = [];
+        const numrepeats = 10;
+        for( var character in errorObj){
+            errorarr.push([character,errorObj[character]]);
+        }
+        let len = errorarr.length;
+        //console.log('errorar length: '+ len);
+
+        //console.log('errorarr ' + errorarr);
+        if(len > 0){
+            errorarr.sort(function(a, b) {
+                return a[1] - b[1];
+            });
+            errorarr.reverse();
+        }
+        errorarr.splice(5);
+
+        res.json({errors: errorarr});
+    }
+    catch(error){
+        res.status(400).send(error.message);
+    }
+}
 
 const getrandomadapttext = async (req,res,next) =>{
     const numwords = 50; //number of words that the textbox displays
@@ -90,7 +131,7 @@ const getrandomadapttext = async (req,res,next) =>{
         const errorObj = usrdoc.errors;
         //console.log(errorObj);
         
-        let errorarr = []
+        let errorarr = [];
         const numrepeats = 10;
         for( var character in errorObj){
             errorarr.push([character,errorObj[character]]);
@@ -301,7 +342,9 @@ const store_usr_data = async(req, res, next) => {
 
                 userDoc.update({
                     wpm: req.body.wpm,
-                    accuracy: req.body.accuracy
+                    accuracy: req.body.accuracy,
+                    pastWpm: app.firestore.FieldValue.arrayUnion(req.body.wpm),
+                    pastAcc: app.firestore.FieldValue.arrayUnion(req.body.accuracy)
                 })
             } 
         });
@@ -321,7 +364,7 @@ const store_usr_data = async(req, res, next) => {
 }
 
 const get_usr_data = async(req, res, next) => {
-
+    console.log('called get_usr_data');
     try {
 
         const url = req.url;
@@ -334,8 +377,8 @@ const get_usr_data = async(req, res, next) => {
         .then((docSnapshot) => {
             if (!docSnapshot.exists) {
                 userDoc.onSnapshot((doc) => {
-                    userDoc.set({ uid:usrid, wpm:0, accuracy:0, errors:{} });
-                    console.log('created new data');
+                    userDoc.set({ uid:usrid, wpm:0, accuracy:0, errors:{}, pastAcc:[],pastWpm:[]});
+                
               });
             } 
         });
@@ -356,6 +399,7 @@ const get_usr_data = async(req, res, next) => {
 module.exports = {
 
     test_res,
+    getTopMistakes,
     getrandomadapttext,
     getrandomtext,
     populate_words,

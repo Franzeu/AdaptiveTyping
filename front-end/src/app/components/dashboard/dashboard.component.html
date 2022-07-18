@@ -9,39 +9,38 @@
   <div class="row">
     <nav class="col-md-2 d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
-        <!-- Go back to Typing test -->
+        <h1 id="title"><i class="fa-solid fa-keyboard"></i> {{ title }}</h1>
         <div class="formGroup">
-          <button type="button"
-          class="redirect"
-          mat-raised-button 
-          routerLink="/logged-in-front">
-          Back to Typing Test</button>
+          <button mat-button [matMenuTriggerFor]="menu"><h1><i class="fa-solid fa-circle-user fa-lg"></i></h1></button>
+          <mat-menu #menu="matMenu">
+            <!-- Go back to Typing test -->
+            <button mat-menu-item routerLink="/logged-in-front"><i class="fa-solid fa-keyboard"></i> Back to the typing test</button>
+            <!-- Log out -->
+            <button mat-menu-item type="button" class="nav-link" (click)="authService.SignOut()" > <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+          </mat-menu>
         </div>
-        <a class="nav-link active">
-          <i class="fas fa-user"></i>User Profile
-        </a>
-        <!-- Calling SignOut() Api from AuthService -->
-        <a class="nav-link" (click)="authService.SignOut()">
-          <i class="fas fa-sign-out-alt"></i>Log out
-        </a>
       </div>
     </nav>
     <!-- Main content -->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="inner-adjust">
         <div class="pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">User Profile</h1>
+          <h1 class="user-profile-title">User Profile</h1>
         </div>
         <!-- Show user data when logged in -->
         <div class="row" *ngIf="authService.userData as user">
           <div class="col-md-12">
             <div class="media">
-              
               <div class="media-body">
-                <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
+                <h1>Hello, <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
+                <h2>Account Details:</h2>
                 <p>User ID: <strong>{{user.uid}}</strong></p>
                 <p>Email: <strong>{{user.email}}</strong></p>
                 <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+                <h2>User Stats:</h2>
+                <p>Average WPM: </p>
+                <p>Average Accuracy: </p>
+                <p>Top frequent mistakes: </p>
               </div>
             </div>
           </div>
