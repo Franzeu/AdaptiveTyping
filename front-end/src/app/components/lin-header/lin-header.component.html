@@ -2,8 +2,8 @@
     <div class="title">
       <h1><i class="fa-solid fa-keyboard"></i> {{ title }}</h1>
       
-      <button class="btn1" mat-fab [matMenuTriggerFor]="menu">
-        <h1><i class="fa-solid fa-circle-user fa-lg"></i></h1>
+      <button class="btn1" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon class="icon">person-outline</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="goToDashboard()"><i class="fa-solid fa-user"></i> My Profile</button>

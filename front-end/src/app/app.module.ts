@@ -23,6 +23,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -80,7 +81,8 @@ import { LoutResultComponent } from './components/lout-result/lout-result.compon
     MatProgressSpinnerModule,
     MatButtonModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

@@ -11,7 +11,9 @@
       <div class="sidebar-sticky">
         <h1 id="title"><i class="fa-solid fa-keyboard"></i> {{ title }}</h1>
         <div class="formGroup">
-          <button mat-button [matMenuTriggerFor]="menu"><h1><i class="fa-solid fa-circle-user fa-lg"></i></h1></button>
+          <button class="btn1" mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon class="icon">person-outline</mat-icon>
+          </button>
           <mat-menu #menu="matMenu">
             <!-- Go back to Typing test -->
             <button mat-menu-item routerLink="/logged-in-front"><i class="fa-solid fa-keyboard"></i> Back to the typing test</button>
@@ -38,8 +40,8 @@
                 <p>Email: <strong>{{user.email}}</strong></p>
                 <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
                 <h2>User Stats:</h2>
-                <p>Average WPM: </p>
-                <p>Average Accuracy: </p>
+                <p>Average WPM:</p>
+                <p>Average Accuracy:</p>
                 <p>Top frequent mistakes: </p>
               </div>
             </div>
