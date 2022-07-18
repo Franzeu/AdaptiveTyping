@@ -1,19 +1,15 @@
 <div class="container">
-    <div class="wpmContainer">
-        <h2>WPM: {{wpm}}</h2>
-        <mat-progress-spinner value="{{wpm}}" ></mat-progress-spinner>
+    <div class="resultsContainer">
+        <h1><strong>WPM:</strong> {{wpm}}</h1>
+        <h1><strong>ACC:</strong> {{accuracy}}%</h1>
     </div>
-    <div class="accuracyContainer">
-        <h2>ACC: {{accuracy}}%</h2>
-        <mat-progress-spinner value="{{accuracy}}" ></mat-progress-spinner>
-    </div>
-
-    <div>
+    
+    <div class="statsContainer">
         <h2>prev WPM: {{ oldWPM }}</h2>
-        <h2>prev ACC: {{ oldAcc }}</h2>
+        <h2>prev ACC: {{ oldAcc }}%</h2>
         <h2>new WPM: {{ wpm }}</h2>
-        <h2>new ACC: {{ accuracy }}</h2>
-        <h1>WPM Improvement: {{ wpmImprovement }}%</h1>
-        <h1>ACC Improvemeent: {{ accImprovement }}%</h1>
+        <h2>new ACC: {{ accuracy }}%</h2>
+        <h2>WPM Improvement: {{ wpmImprovement }}%</h2>
+        <h2>ACC Improvemeent: {{ accImprovement }}%</h2>
     </div>
 </div>

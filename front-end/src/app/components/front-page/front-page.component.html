@@ -17,11 +17,11 @@
     [timeDone]="done"
     (newInputEvent)="transferInput($event)"
   ></app-typing-textbox>
+  <app-refresh></app-refresh>
   <app-result
     *ngIf="this.done"
     [target]="this.target" 
     [userInput]="this.userInput" 
     [time]="this.time"
   ></app-result>
-  <app-refresh></app-refresh>
 </div>

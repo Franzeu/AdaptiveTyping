@@ -22,6 +22,7 @@ import { ForgotPasswordsComponent } from './components/forgot-passwords/forgot-p
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -74,7 +75,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     HttpClientModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
