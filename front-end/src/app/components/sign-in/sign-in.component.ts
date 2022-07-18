@@ -7,7 +7,7 @@ import { AuthService } from '../../shared/services/auth.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-
+  title: string = "AdaptiveTyping"
   constructor(public authService: AuthService) { }
 
   ngOnInit(){

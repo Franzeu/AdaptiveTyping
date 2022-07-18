@@ -1,29 +1,29 @@
 <div class="displayTable">
   <div class="displayTableCell">
     <div class="authBlock">
+      <h1 id="title"><i class="fa-solid fa-keyboard"></i> {{ title }}</h1>
       <h3>Sign In</h3>
       <div class="formGroup">
-        <input
-          type="text"
-          class="formControl"
-          placeholder="Username"
-          #userName
-          required
-        />
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label >Username</mat-label>
+          <input matInput type="text" class="formControl" #userName required/>
+        </mat-form-field>
       </div>
 
       <div class="formGroup">
-        <input
-          type="password"
-          class="formControl"
-          placeholder="Password"
-          #userPassword
-          required
-        />
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label >Password</mat-label>
+          <input matInput type="password" class="formControl" #userPassword required/>
+        </mat-form-field>
+        
       </div>
-
+      <br>
       <!-- Calling SignIn Api from AuthService -->
       <div class="formGroup">
+        <!-- <button mat-raised-button type="button"
+        class="btn btnPrimary"
+        value="Log in"
+        (click)="authService.SignIn(userName.value, userPassword.value)">Log In</button> -->
         <input
           type="button"
           class="btn btnPrimary"
@@ -31,38 +31,28 @@
           (click)="authService.SignIn(userName.value, userPassword.value)"
         />
       </div>
-
+      <br>
       <div class="formGroup">
-        <span class="or"><span class="orInner">Or</span></span>
+        <p><span class="or"><span class="orInner">Or</span></span></p>
       </div>
 
       <!-- Calling GoogleAuth Api from AuthService -->
       <div class="formGroup">
-        <button
-          type="button"
-          class="btn googleBtn"
-          mat-raised-button
-          (click)="authService.GoogleAuth()"
-        >
+        <button type="button" class="btn googleBtn" mat-raised-button (click)="authService.GoogleAuth()">
           <i class="fab fa-google-plus-g"></i>
           Log in with Google
         </button>
       </div>
-
+      <br>
       <div class="forgotPassword">
-        <span routerLink="/forgot-password">Forgot Password?</span>
+        <p><span routerLink="/forgot-password">Forgot Password?</span></p>
+        
       </div>
     </div>
 
     <div class="redirectToLogin">
-      <span
-        >Don't have an account?<span
-          class="redirect"
-          routerLink="/register-user"
-        >
-          Sign Up</span
-        ></span
-      >
+      <p>Don't have an account? <span class="redirect" routerLink="/register-user"> Sign Up</span></p>
+      
     </div>
 
     <!-- Go back to Typing test -->

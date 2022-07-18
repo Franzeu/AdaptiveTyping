@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,8 +20,9 @@ import { ForgotPasswordsComponent } from './components/forgot-passwords/forgot-p
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FrontPageComponent } from './components/front-page/front-page.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatMenu, MatMenuModule } from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -78,7 +77,6 @@ import { LoutResultComponent } from './components/lout-result/lout-result.compon
     MatInputModule,
     FormsModule,
     HttpClientModule,
-    MatProgressSpinnerModule,
     MatButtonModule,
     MatDialogModule,
     MatMenuModule,
