@@ -23,5 +23,4 @@ export class WordsService {
   getWords(): Observable<Word>{
     return this.http.get<Word>(this.apiURL);
   }
-  
 }

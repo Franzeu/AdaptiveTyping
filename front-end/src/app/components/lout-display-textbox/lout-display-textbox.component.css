@@ -1,0 +1,27 @@
+.text-display {
+    width: 1000px;
+    height: 200px;
+    padding: 1rem;
+    margin: auto;
+    
+    border: 2px;
+    border-radius: 0.5rem;
+    
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11);
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    color: #444444;
+    background-color: FFFFFF;
+    word-wrap: break-word;
+    overflow: hidden;
+    font-family: 'Roboto Mono', "Helvetica Neue", sans-serif; 
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+    text-decoration: underline;
+  }

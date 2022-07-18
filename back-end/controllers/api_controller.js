@@ -20,9 +20,9 @@ function validWord( word, chr, ratio, pastratio)
 {
     let numchars = 0;
     let wordratio;
-    console.log('word: ' + word + ' char: ' + chr + ' ratio: ' + ratio + ' pastratio: ' + pastratio);
+    //console.log('word: ' + word + ' char: ' + chr + ' ratio: ' + ratio + ' pastratio: ' + pastratio);
     if(ratio <= pastratio){
-        console.log('passed special 2');
+        //console.log('passed special 2');
         return 2; //exit loop
     } 
 
@@ -31,7 +31,7 @@ function validWord( word, chr, ratio, pastratio)
 
     }
     wordratio = numchars/word.length;
-    console.log('wordratio: ' + wordratio); 
+    //console.log('wordratio: ' + wordratio); 
     
     if(wordratio > pastratio) return 1;// add word to cache
     else if (wordratio >= ratio) return 2;//exit loop
@@ -63,7 +63,7 @@ const test_res = async  (req, res, next) => {
 
 
 const getrandomadapttext = async (req,res,next) =>{
-    const numwords = 30; //number of words that the textbox displays
+    const numwords = 50; //number of words that the textbox displays
     console.log("called get getrandomadapttext");
     try{
         //const usrid = 'po4bTvVvZ3VG0hJsjdoZSC7FE9m1';
@@ -133,7 +133,7 @@ const getrandomadapttext = async (req,res,next) =>{
                         do {
                             let arr = doc.data()[keys[getRandomInt(keys.length)]];
                             str = arr[getRandomInt(arr.length)];
-                            console.log('wordcache: ' + wordcache);
+                            //console.log('wordcache: ' + wordcache);
                             j++;
                             if(j == numrepeats){
                                 charratio -= 0.1;

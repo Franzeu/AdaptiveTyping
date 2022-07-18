@@ -38,6 +38,8 @@ import { LinHeaderComponent } from './components/lin-header/lin-header.component
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { RefreshComponent } from './components/refresh/refresh.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { LoutDisplayTextboxComponent } from './components/lout-display-textbox/lout-display-textbox.component';
+import { LoutResultComponent } from './components/lout-result/lout-result.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     LinHeaderComponent,
     UserDataComponent,
     RefreshComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoutDisplayTextboxComponent,
+    LoutResultComponent
   ],
   imports: [
     BrowserModule,
