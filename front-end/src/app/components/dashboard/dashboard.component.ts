@@ -17,9 +17,16 @@ export class DashboardComponent implements OnInit, DoCheck {
   accuracy!: number;
   pastWPM: any[] = [];
   pastAcc: any[] = [];
+  topMistakes: string[] = [];
+  avgWPM: number = 0;
+  avgAcc: number = 0;
+  avgWPMStr!: string;
+  avgAccStr!: string;
   isLoaded: boolean = false;
   once: boolean = false;
+  check: boolean = false;
   private statsURL = 'http://localhost:4000/api/gtusrdata';
+  private errorsURL = 'http://localhost:4000/api/mistakes'
 
   constructor(public authService: AuthService, private http: HttpClient) {}
 
@@ -62,6 +69,27 @@ export class DashboardComponent implements OnInit, DoCheck {
       this.getUserStats().subscribe((response) => {
         this.pastWPM = response.pastWpm;
         this.pastAcc = response.pastAcc;
+        this.avgWPM = 0;
+        this.avgAcc = 0;
+        
+        if (this.pastWPM !== undefined) {
+          for (let entry of this.pastWPM) {
+          
+          this.avgWPM += entry;
+          }
+          this.avgWPM /= this.pastWPM.length;
+        }
+        
+        if (this.pastAcc !== undefined) {
+          for (let entry of this.pastAcc) {
+          
+          this.avgAcc += entry;
+          }
+          this.avgAcc /= this.pastAcc.length;
+        }
+
+        this.avgWPMStr = this.avgWPM.toFixed(2);
+        this.avgAccStr = this.avgAcc.toFixed(2);
 
         const a: number[] = [];
         for (let i = 0; i < this.pastWPM.length; i++) {
@@ -81,11 +109,29 @@ export class DashboardComponent implements OnInit, DoCheck {
         this.isLoaded = true;
       });
     }
+
+    if (!this.check && this.authService.userData !== undefined) {
+
+      this.getUserError().subscribe((response) => {
+         for(let i = 0; i < response.errors.length; i++){
+           this.topMistakes.push(response.errors[i][0]);
+         }
+         console.log(this.topMistakes);
+      });
+      
+      this.check = true;
+    }
+
   }
 
   getUserStats(): Observable<userStats>{
     const criteria = [ {uid: this.authService.userData.uid} ];
     return this.http.get<userStats>(this.statsURL + "/?criteria=" + encodeURIComponent( JSON.stringify(criteria)));
   }  
+
+  getUserError(): Observable<any>{
+    return this.http.get<any>(this.errorsURL + "/" + this.authService.userData.uid);
+  }
+  
 
 }

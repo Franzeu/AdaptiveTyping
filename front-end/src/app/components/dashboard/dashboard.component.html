@@ -36,13 +36,16 @@
               <div class="media-body">
                 <h1>Hello, <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
                 <h2>Account Details:</h2>
-                <p>User ID: <strong>{{user.uid}}</strong></p>
-                <p>Email: <strong>{{user.email}}</strong></p>
-                <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+                <p>User ID: {{user.uid}}</p>
+                <p>Email: {{user.email}}</p>
+                <p>Email Verified: {{user.emailVerified}}</p>
                 <h2>User Stats:</h2>
-                <p>Average WPM:</p>
-                <p>Average Accuracy:</p>
-                <p>Top frequent mistakes: </p>
+                <p>Average WPM: {{ avgWPMStr }}</p>
+                <p>Average Accuracy: {{ avgAccStr }}</p>
+                <p>Top frequent mistakes:</p>
+                <div *ngFor="let item of topMistakes; let i = index">
+                  <p>{{i + 1}}. {{ item }}</p>
+                </div>
                 <div style="display: flex;">
                   <canvas *ngIf="isLoaded" baseChart width="400" height="400"
                     [type]="'line'"

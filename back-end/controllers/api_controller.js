@@ -5,10 +5,12 @@ const firestore = firebase.firestore();
 const app = require('firebase/app');
 var fs = require('fs');
 const { json } = require('body-parser');
-
-function getRandomInt(max) { //used to return random integer
+/*returns a random integer between 0 and max*/
+function getRandomInt(max) { 
   return Math.floor(Math.random() * max);
 }
+
+
 /*checks if word meets or exceeds character ratio
 If current word doesn't meet ratio but has a ratio 
 higher than word in cache return 1.
@@ -40,7 +42,9 @@ function validWord( word, chr, ratio, pastratio)
     //return wordratio >= ratio;
 }
 
-function findWordRatio(word, chr){// finds ratio of  'c' characters in input string
+/*calculares and returns ratio of characters in input string
+returns ratio*/
+function findWordRatio(word, chr){
     let numchars = 0;
     for (let i = 0; i < word.length; i++){
         if(word[i] == chr) numchars++;
@@ -49,17 +53,10 @@ function findWordRatio(word, chr){// finds ratio of  'c' characters in input str
     return numchars/word.length;
 }
 
-const test_res = async  (req, res, next) => {
-    console.log("test called");
-    try{
-        res.send('backend test successful');
-    }
 
-    catch (error) {
-        res.status(400).send(error.message);
-    }
-};
 
+/*sends the top five character mistakes for 
+specified uid back to client*/
 const getTopMistakes = async (req,res,next) =>{
     console.log('called getTopMistakes');
     try{
@@ -103,6 +100,8 @@ const getTopMistakes = async (req,res,next) =>{
     }
 }
 
+/*Creates and sends pseudorandom array of 50 strings based on
+specified UID's top 5 mistakes*/
 const getrandomadapttext = async (req,res,next) =>{
     const numwords = 50; //number of words that the textbox displays
     console.log("called get getrandomadapttext");
@@ -129,7 +128,6 @@ const getrandomadapttext = async (req,res,next) =>{
         const usrdata = await usr.get();
         const usrdoc = usrdata.data();
         const errorObj = usrdoc.errors;
-        //console.log(errorObj);
         
         let errorarr = [];
         const numrepeats = 10;
@@ -137,9 +135,7 @@ const getrandomadapttext = async (req,res,next) =>{
             errorarr.push([character,errorObj[character]]);
         }
         let len = errorarr.length;
-        //console.log('errorar length: '+ len);
 
-        //console.log('errorarr ' + errorarr);
         if(len > 0){
             errorarr.sort(function(a, b) {
                 return a[1] - b[1];
@@ -147,10 +143,7 @@ const getrandomadapttext = async (req,res,next) =>{
             errorarr.reverse();
         }
         
-        //console.log('errorpos');
-
         
-
         if(data.empty){
             res.status(500).send('firestore Words collection is empty');
         }
@@ -174,7 +167,6 @@ const getrandomadapttext = async (req,res,next) =>{
                         do {
                             let arr = doc.data()[keys[getRandomInt(keys.length)]];
                             str = arr[getRandomInt(arr.length)];
-                            //console.log('wordcache: ' + wordcache);
                             j++;
                             if(j == numrepeats){
                                 charratio -= 0.1;
@@ -200,13 +192,11 @@ const getrandomadapttext = async (req,res,next) =>{
                             
                             
                         }while(searching)
-                        //console.log('charratio '+ charratio);
                         textArray.push(wordcache);
                     
 
                         
                     }
-                    //console.log('textarray' + textArray);
                     res.json({english: textArray});
                 })
             }
@@ -235,6 +225,8 @@ const getrandomadapttext = async (req,res,next) =>{
     }
 }
 
+
+/*creates and sends 50 random words to client*/
 const getrandomtext = async (req,res,next) =>{
     const numwords = 50; //number of words that the textbox displays
     const numletters = 4; //number of letter array fields in document
@@ -271,9 +263,8 @@ const getrandomtext = async (req,res,next) =>{
     }
 }
 
-
-
-// function to populate firestore words collection with data from local file, still being implemented
+/*populates firestore words collection with data
+from local file*/
 const populate_words = async (req, res, next) => {
     console.log('populate_words called');
     try {
@@ -314,13 +305,15 @@ const populate_words = async (req, res, next) => {
 
 }
 
+/*store results from uid's typing test
+in firestore userstats collection*/
 const store_usr_data = async(req, res, next) => {
     try{
         const usridarr = Object.values(req.body.uid);
         const usrid = usridarr.join("");
         
-        const userDoc = await firestore.collection('userstats').doc(usrid);
-        userDoc.get()
+        const userDoc = await firestore.collection('userstats').doc(usrid); //if usid doesn't exist in userstats
+        userDoc.get()                                                       //collection, create it
         .then((docSnapshot) => {
             if (!docSnapshot.exists) {
                 userDoc.onSnapshot((doc) => {
@@ -349,20 +342,19 @@ const store_usr_data = async(req, res, next) => {
             } 
         });
 
-        // await firestore.collection('userstats').doc(usrid).set(req.body);
-
         res.send('User Data Received');
 
 
     }
     catch(error){
-        //res.send('data not success');
         console.log(error.message);
 
 		res.status(400).send(error.message)
     }
 }
 
+/*pulls data from userstats collection for specified UID
+and sends it to client*/
 const get_usr_data = async(req, res, next) => {
     console.log('called get_usr_data');
     try {
@@ -372,11 +364,10 @@ const get_usr_data = async(req, res, next) => {
         const usrid = criteria[0].uid;
 
         let userDoc  = await firestore.collection('userstats').doc(usrid);
-       // const user: userStats = { uid:this.authService.userData.uid, wpm:wpmNum, accuracy:accNum, errors:errorDictionary }
         userDoc.get()
         .then((docSnapshot) => {
-            if (!docSnapshot.exists) {
-                userDoc.onSnapshot((doc) => {
+            if (!docSnapshot.exists) {                  //if userstats doc doesn't exist for UID create it
+                userDoc.onSnapshot((doc) => {           //and populate it with empty fields
                     userDoc.set({ uid:usrid, wpm:0, accuracy:0, errors:{}, pastAcc:[],pastWpm:[]});
                 
               });
@@ -384,7 +375,6 @@ const get_usr_data = async(req, res, next) => {
         });
         
         let stats = await userDoc.get();
-        //console.log('stats length: ' + stats.data().length);
         res.json(stats.data());
 
     }
@@ -397,8 +387,6 @@ const get_usr_data = async(req, res, next) => {
 }
 
 module.exports = {
-
-    test_res,
     getTopMistakes,
     getrandomadapttext,
     getrandomtext,
