@@ -20,16 +20,20 @@ export class TimerComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
+    // Start timer if signal received from typing box
     if (this.signalReceived && !this.started) {
       this.startTimer();
       this.started = true;
     }
+    // If test is done, emit event
     if (this.testDone || this.startTime === 0) {
+      // Clear timer
       clearInterval(this.id);
       this.endTimeEvent.emit(this.startTime);
     }
   }
   
+  // Start timer by setting interval
   startTimer() {
     this.id = this.interval = setInterval(() => {
       if(this.startTime > 0) {

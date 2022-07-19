@@ -39,7 +39,6 @@ import { LinFrontPageComponent } from './components/lin-front-page/lin-front-pag
 import { LinHeaderComponent } from './components/lin-header/lin-header.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { RefreshComponent } from './components/refresh/refresh.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { LoutDisplayTextboxComponent } from './components/lout-display-textbox/lout-display-textbox.component';
 import { LoutResultComponent } from './components/lout-result/lout-result.component';
 import { NgChartsModule } from 'ng2-charts';
@@ -64,7 +63,6 @@ import { NgChartsModule } from 'ng2-charts';
     LinHeaderComponent,
     UserDataComponent,
     RefreshComponent,
-    ProfileComponent,
     LoutDisplayTextboxComponent,
     LoutResultComponent
   ],

@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TitleStrategy } from '@angular/router';
-import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,41 +7,42 @@ import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
   styleUrls: ['./front-page.component.css']
 })
 export class FrontPageComponent {
-  @Input() target!: String;
+  @Input() target!: string;
   @Input() signalTimer!: boolean;
   @Input() done: boolean = false;
-  @Input() userInput!: String;
+  @Input() userInput!: string;
   @Input() time!: number;
 
   constructor(private cdref: ChangeDetectorRef) {}
-
+  // Suprreses a warning from the console. Doesn't break anything.
   ngAfterContentChecked() {
     this.cdref.detectChanges();
   }
-
-  start() {
-    console.log("start");
-  }
-
-  setTarget(target: String) {
+  
+  // Set the target string
+  setTarget(target: string) {
     this.target = target;
   }
 
+  // Set the timer to be sent to child component
   sendSignalTimer(signalTimer: boolean) {
       this.signalTimer = signalTimer;
   }
 
-  typingDone(userInput: String) {
+  // Signal the test being done to typing box component
+  typingDone(userInput: string) {
     this.done = true;
     this.userInput = userInput;
   }
 
+  // Signal the test being done to timer component
   timerDone(time: number) {
     this.done = true;
     this.time = time;
   }
 
-  transferInput(newInput: String) {
+  // Send input to child component
+  transferInput(newInput: string) {
     this.userInput = newInput;
   }
 }

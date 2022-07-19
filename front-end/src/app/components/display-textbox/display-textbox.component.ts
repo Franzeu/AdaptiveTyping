@@ -2,11 +2,8 @@ import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } fr
 import { WordsService } from 'src/app/words.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Word } from 'src/app/Word';
-import { getAuth } from 'firebase/auth';
-import { outputAst } from '@angular/compiler';
-import { Observable, of} from 'rxjs';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-display-textbox',
@@ -15,15 +12,15 @@ import { throwError } from 'rxjs';
 })
 export class DisplayTextboxComponent implements OnInit{
   data!: Word;
-  words!: String;
+  words!: string;
   isLoaded: boolean = false;
   haveuid: boolean = false;
-  @Input() userInput!: String;
-  @Output() displaySet = new EventEmitter();
   htmlStr: string = "";
   once: boolean = false;
+  @Input() userInput!: string;
+  @Output() displaySet = new EventEmitter();
 
-  constructor(private wordService: WordsService, private authService: AuthService, private http: HttpClient) { }
+  constructor(private authService: AuthService, private http: HttpClient) { }
 
   ngOnInit(): void {  
   }
@@ -31,13 +28,15 @@ export class DisplayTextboxComponent implements OnInit{
   ngDoCheck(): void {
 
      if (!this.once) {
+      // Get display from back-end
       if (this.authService.userData !== undefined) {
         this.getText().subscribe((response) => {
           this.data = response;
           this.isLoaded = true;
           this.words = this.data.english.join(' ');
+          // Send display string to other components
           this.displaySet.emit(this.words);
-        
+          // Wrap letters with span
           for (let i = 0; i < this.words.length; i++) {
             let newSpan = "<span class='default'>" + this.words[i] + "</span>";
             this.htmlStr += newSpan;
@@ -53,8 +52,6 @@ export class DisplayTextboxComponent implements OnInit{
 
   refresh(): void {
     // Make sure variables are not undefined
-    //console.log('display uid? ' + this.authService.userData);
-
     if (this.isLoaded && this.userInput !== undefined) {
       this.htmlStr = "";
         for (var i = 0; i < this.userInput.length; i++) {
@@ -74,10 +71,9 @@ export class DisplayTextboxComponent implements OnInit{
         }
     }
   }
-
+  // Obtains random text from backend 
   getText(): Observable<Word> {
       const apiURL = 'http://localhost:4000/api/randomtext/' + this.authService.userData.uid;
-      console.log(apiURL);
       return this.http.get<Word>(apiURL);
   }
 }

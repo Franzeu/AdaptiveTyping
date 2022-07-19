@@ -1,9 +1,10 @@
 <div class="container">
+    <!-- Displays current WPM and ACC after finishing typing test -->
     <div class="resultsContainer">
         <h1><strong>WPM:</strong> {{wpm}}</h1>
         <h1><strong>ACC:</strong> {{accuracy}}%</h1>
     </div>
-    
+    <!-- Displays WPM and ACC improvement -->
     <div class="statsContainer">
         <h2 *ngIf="gainWPM">WPM Improvement: <span class="gain">{{ wpmImprovement }}%</span></h2>
         <h2 *ngIf="!gainWPM">WPM Improvement: <span class="loss">{{ wpmImprovement }}%</span></h2>

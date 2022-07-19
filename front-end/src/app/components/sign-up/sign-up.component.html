@@ -1,16 +1,18 @@
 <div class="displayTable">
   <div class="displayTableCell">
     <div class="authBlock">
+      <!-- Main Content -->
       <h1 id="title"><i class="fa-solid fa-keyboard"></i> {{ title }}</h1>
       <h3>Sign Up</h3>
 
       <div class="formGroup">
+        <!-- Email Address Text Field -->
         <mat-form-field class="form-field" appearance="fill">
           <mat-label>Email Address</mat-label>
           <input matInput type="email" class="formControl" #userEmail required/>
         </mat-form-field>
       </div>
-
+      <!-- Password Text Field -->
       <div class="formGroup">
         <mat-form-field class="form-field" appearance="fill">
           <mat-label>Password</mat-label>
@@ -19,24 +21,19 @@
         
       </div>
       <br>
+      <!-- Sign Up button-->
       <div class="formGroup">
         <button mat-raised-button  type="button"
         class="btn btnPrimary"
         value="Sign Up"
         (click)="authService.SignUp(userEmail.value, userPwd.value)"> Sign Up</button>
-        <!-- <input
-          type="button"
-          class="btn btnPrimary"
-          value="Sign Up"
-          (click)="authService.SignUp(userEmail.value, userPwd.value)"
-        /> -->
       </div>
       <br>
       <div class="formGroup">
         <p><span class="or"><span class="orInner">Or</span></span></p>
         
       </div>
-      <!-- Continue with Google -->
+      <!-- Continue with Google button-->
       <div class="formGroup">
         <button
           type="button"
@@ -50,6 +47,7 @@
       </div>
     </div>
     <br>
+    <!-- Redurect to Login Page -->
     <div class="redirectToLogin">
       <p><span
         >Already have an account?

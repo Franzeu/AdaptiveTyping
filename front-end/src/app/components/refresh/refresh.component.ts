@@ -11,6 +11,7 @@ export class RefreshComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  // Refreshes the typing test page
   reloadCurrentPage() {
     window.location.reload();
   }

@@ -1,7 +1,6 @@
-import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WordsService } from 'src/app/words.service';
 import { Word } from 'src/app/Word';
-import { outputAst } from '@angular/compiler';
 
 @Component({
   selector: 'app-lout-display-textbox',
@@ -10,21 +9,24 @@ import { outputAst } from '@angular/compiler';
 })
 export class LoutDisplayTextboxComponent implements OnInit{
   data!: Word;
-  words!: String;
+  words!: string;
   isLoaded: boolean = false;
-  @Input() userInput!: String;
+  @Input() userInput!: string;
   @Output() displaySet = new EventEmitter();
   htmlStr: string = "";
 
   constructor(private wordService: WordsService) { }
 
   ngOnInit(): void {  
+    // Get display text from backend
     this.wordService.getWords().subscribe((response) => {
       this.data = response;
       this.isLoaded = true;
       this.words = this.data.english.join(' ');
+      // Send it to child components
       this.displaySet.emit(this.words);
     
+      // Wrap span around each letter
       for (let i = 0; i < this.words.length; i++) {
         let newSpan = "<span class='default'>" + this.words[i] + "</span>";
         this.htmlStr += newSpan;
@@ -32,6 +34,7 @@ export class LoutDisplayTextboxComponent implements OnInit{
     });
   }
 
+  // Gets called when change happens
   ngDoCheck(): void {
     this.refresh();
   }
@@ -40,6 +43,7 @@ export class LoutDisplayTextboxComponent implements OnInit{
     // Make sure variables are not undefined
     if (this.isLoaded && this.userInput !== undefined) {
       this.htmlStr = "";
+        // Set class of span if right or wrong
         for (var i = 0; i < this.userInput.length; i++) {
           if(this.words[i] === this.userInput[i]) {
             let newSpan = "<span class='correct'>" + this.words[i] + "</span>";

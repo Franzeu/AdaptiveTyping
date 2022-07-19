@@ -19,7 +19,7 @@ export class WordsService {
   private userURL = 'http://localhost:4000/api/store_usr_data'
   
   constructor(private http: HttpClient ) { }
-
+  // Get request words from apiURL
   getWords(): Observable<Word>{
     return this.http.get<Word>(this.apiURL);
   }

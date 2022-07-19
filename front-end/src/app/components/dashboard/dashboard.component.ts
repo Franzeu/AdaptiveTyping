@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit, DoCheck {
   avgWPMStr!: string;
   avgAccStr!: string;
   isLoaded: boolean = false;
-  once: boolean = false;
-  check: boolean = false;
+  statsOnce: boolean = false;
+  mistakesOnce: boolean = false;
   private statsURL = 'http://localhost:4000/api/gtusrdata';
   private errorsURL = 'http://localhost:4000/api/mistakes'
 
@@ -65,13 +65,15 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    if (!this.once && this.authService.userData !== undefined) {
+    // Get user stats from back-end
+    if (!this.statsOnce && this.authService.userData !== undefined) {
       this.getUserStats().subscribe((response) => {
         this.pastWPM = response.pastWpm;
         this.pastAcc = response.pastAcc;
         this.avgWPM = 0;
         this.avgAcc = 0;
         
+        // Calculate avg wpm and acc
         if (this.pastWPM !== undefined) {
           for (let entry of this.pastWPM) {
           
@@ -88,30 +90,32 @@ export class DashboardComponent implements OnInit, DoCheck {
           this.avgAcc /= this.pastAcc.length;
         }
 
+        // Set to display
         this.avgWPMStr = this.avgWPM.toFixed(2);
         this.avgAccStr = this.avgAcc.toFixed(2);
 
-        const a: number[] = [];
+        // Set x and y axis of charts
+        const wpmArr: number[] = [];
         for (let i = 0; i < this.pastWPM.length; i++) {
-          a.push(i);
+          wpmArr.push(i);
         }
-        this.lineChartDataWPM.labels = a;
+        this.lineChartDataWPM.labels = wpmArr;
         this.lineChartDataWPM.datasets[0].data = this.pastWPM;
 
-        const b: number[] = [];
+        const accArr: number[] = [];
         for (let i = 0; i < this.pastAcc.length; i++) {
-          b.push(i);
+          accArr.push(i);
         }
-        this.lineChartDataAcc.labels = b;
+        this.lineChartDataAcc.labels = accArr;
         this.lineChartDataAcc.datasets[0].data = this.pastAcc;
 
-        this.once = true;
+        this.statsOnce = true;
         this.isLoaded = true;
       });
     }
 
-    if (!this.check && this.authService.userData !== undefined) {
-
+    if (!this.mistakesOnce && this.authService.userData !== undefined) {
+      // Appends user errors from response to topMistakes variable
       this.getUserError().subscribe((response) => {
          for(let i = 0; i < response.errors.length; i++){
            this.topMistakes.push(response.errors[i][0]);
@@ -119,16 +123,17 @@ export class DashboardComponent implements OnInit, DoCheck {
          console.log(this.topMistakes);
       });
       
-      this.check = true;
+      this.mistakesOnce = true;
     }
 
   }
-
+  // Obtains user stats from backend using get request
   getUserStats(): Observable<userStats>{
     const criteria = [ {uid: this.authService.userData.uid} ];
     return this.http.get<userStats>(this.statsURL + "/?criteria=" + encodeURIComponent( JSON.stringify(criteria)));
   }  
 
+  // Obtains errors array from backend using get request
   getUserError(): Observable<any>{
     return this.http.get<any>(this.errorsURL + "/" + this.authService.userData.uid);
   }

@@ -6,6 +6,8 @@ import { AuthService } from '../../shared/services/auth.service';
   templateUrl: './verify-email.component.html',
   styleUrls: ['./verify-email.component.css']
 })
+
+// Imports AuthService to the component
 export class VerifyEmailComponent implements OnInit {
   title: string = "AdaptiveTyping"
   constructor(

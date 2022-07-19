@@ -1,13 +1,4 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
-import { HttpHeaders} from '@angular/common/http';
-
-const httpOptions = {
-  headers: new HttpHeaders(
-    {
-      "Content-Type": "application/json",
-    },
-  )
-}
 
 @Component({
   selector: 'app-lout-result',
@@ -17,8 +8,8 @@ const httpOptions = {
 export class LoutResultComponent implements OnInit, DoCheck {
   @Input() testDone: boolean = false;
   @Input() timeDone: boolean = false;
-  @Input() userInput!: String;
-  @Input() target!: String;
+  @Input() userInput!: string;
+  @Input() target!: string;
   @Input() time!: number;
   wpm!: string;
   accuracy!: string;
@@ -38,7 +29,7 @@ export class LoutResultComponent implements OnInit, DoCheck {
       const inputArray = this.userInput.split(/(\s+)/).filter( str => str.trim().length > 0)
       const errorArray = [];
       var errorDictionary: { [key: string]: any } = {};
-
+      // Stores the mistakes that user makes on the typing test into a dictionary and array.
       for (let i = 0; i < targetArray.length && i < inputArray.length; i++) {
         if (targetArray[i] !== inputArray[i]) {
           for (let x = 0; x < targetArray[i].length; x++){

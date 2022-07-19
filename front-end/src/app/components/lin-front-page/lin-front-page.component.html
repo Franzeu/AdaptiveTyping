@@ -1,15 +1,19 @@
+<!-- Content that is shown on the main page IF logged in-->
 <div>
-    <!-- <app-profile></app-profile> -->
+    <!-- Logged in Header Component -->
     <app-lin-header></app-lin-header>
+    <!-- Timer Component -->
     <app-timer 
       [signalReceived]="this.signalTimer" 
       [testDone]="this.done" 
       (endTimeEvent)="timerDone($event)"
     ></app-timer>
+    <!-- Display Textbox Component -->
     <app-display-textbox 
       (displaySet)="setTarget($event)" 
       [userInput]="this.userInput"
     ></app-display-textbox>
+    <!-- Typing Textbox Component -->
     <app-typing-textbox 
       [target]="this.target" 
       (hasTestStartedEvent)="sendSignalTimer($event)" 
@@ -17,7 +21,9 @@
       [timeDone]="done"
       (newInputEvent)="transferInput($event)"
     ></app-typing-textbox>
+    <!-- Refresh Button Component -->
     <app-refresh></app-refresh>
+    <!-- Result Component -->
     <app-result
       *ngIf="this.done"
       [target]="this.target" 

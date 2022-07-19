@@ -47,6 +47,7 @@ export class ResultComponent implements OnInit, DoCheck {
     // Make sure old user stats are read in
     this.getUserStats().subscribe((response) => {
     
+      // Calculate avg wpm and acc
       this.pastWPM = response.pastWpm;
       this.pastAcc = response.pastAcc;
 
